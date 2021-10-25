@@ -1,3 +1,5 @@
+import randInt from "./resources.js";
+
 let img;
 
 function preload() {
@@ -5,8 +7,8 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(400, 400);
-    background(0);
+    createCanvas(windowWidth, windowHeight);
+    background(255);
     
     let test = createVector(200, 250);
 
@@ -14,6 +16,8 @@ function setup() {
     circle(test.x, test.y, 50);
 
     image(img, 0, 0, 200, 200);
+
+    console.log(randInt(0, 100));
 }
 
 function draw() {
