@@ -99,7 +99,7 @@ export class Game {
                                 console.log(tile.x + " " + tile.y);
 
                                 game.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
-                            }, 1000, tile);
+                            }, 1050, tile, this);
                         }
                     });
 
@@ -113,7 +113,6 @@ export class Game {
                         });
                     }
         
-                    
                     break;
                 default:
                     break;
