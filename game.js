@@ -60,10 +60,18 @@ export class Game {
                         if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
                             console.log("It found the right tile " + tile.xIndex + " " + tile.yIndex);
 
-                            let beginning = createVector(tile.x, tile.y);
-                            let destination = createVector(this.boardCorner + tile.xIndex * this.tileSize,
-                                this.boardCorner + tile.yIndex * this.tileSize);
-                            let movement = createVector(destination.x - beginning.x, destination.y - beginning.y);
+                            let beginning = {
+                                x: tile.x,
+                                y: tile.y
+                            }
+                            let destination = {
+                                x: this.boardCorner + event.to[0] * this.tileSize,
+                                y: this.boardCorner + event.to[1] * this.tileSize
+                            }
+                            let movement = {
+                                x: destination.x - beginning.x,
+                                y: destination.y - beginning.y
+                            }
                             for (let t = 0; t < 100; t++) {
                                 // console.log("time test");
                                 // setTimeout((tile, beginning, movement) => {
@@ -75,7 +83,7 @@ export class Game {
 
                                 
                             }
-                            
+
                             setTimeout((tile) => {
                                 tile.x = destination.x;
                                 tile.y = destination.y;
