@@ -1,4 +1,7 @@
-
+import * as rs from "./resources.js";
+import * as bU from "./board.js";
+import * as evU from "./event.js";
+import * as pU from "./piece.js";
 
 
 // piece effect function template (event, board) => {}
