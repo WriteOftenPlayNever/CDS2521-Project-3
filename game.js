@@ -92,14 +92,14 @@ export class Game {
 
                             console.log(destination);
 
-                            setTimeout((tile, game) => {
+                            setTimeout((tile, game, tiles) => {
                                 tile.x = destination.x;
                                 tile.y = destination.y;
 
                                 console.log(tile.x + " " + tile.y);
 
-                                game.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
-                            }, 1050, tile, this);
+                                game.tiles = tiles;
+                            }, 1050, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                         }
                     });
 
