@@ -1,7 +1,7 @@
 let img;
 
 function preload() {
-    img = loadImage('Language.JPG');
+    img = loadImage('img/onyx/druid.png');
 }
 
 function setup() {
