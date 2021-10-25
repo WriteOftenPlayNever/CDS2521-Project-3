@@ -23,22 +23,33 @@ import { Evaluator } from "./evaluator.js";
 // }
 
 
-export function newGame() {
-    let pearlPlayer = players["Anne Passant"];
-    let onyxPlayer = players["Json Smythe"];
+export class Game {
+    constructor(pearlPlayer, onyxPlayer, boardCorner, tileSize) {
+        this.pearlPlayer = pearlPlayer;
+        this.onyxPlayer = onyxPlayer;
+        this.boardCorner = boardCorner;
+        this.tileSize = tileSize;
+        this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
 
-    let game = {
-        board: bU.newBoard(8, pearlPlayer, onyxPlayer),
-        pearl: pearlPlayer,
-        onyx: onyxPlayer
+        bU.initialise(this.board, pearlPlayer, onyxPlayer);
     }
 
-    circle(200, 100, 100);
-
-    bU.initialise(game.board, pearlPlayer, onyxPlayer);
-
-    return game;
+    drawToCanvas() {
+        noStroke();
+        for (let x = gameBoard.length - 1; x > -1; x--) {
+            for (let y = 0; y < gameBoard.length; y++) {
+                if ((x + y) % 2 === 0) {
+                    fill(255, 218, 179);
+                    square(this.boardCorner + (x * this.tileSize), tileSize);
+                } else {
+                    fill(255);
+                    square(this.boardCorner + (y * this.tileSize), tileSize);
+                }
+            }
+        }
+    }
 }
+
 
 
 

@@ -1,4 +1,5 @@
 import * as game from "./game.js";
+import { players } from "./players.js";
 
 window.preload = function () {
     
@@ -6,15 +7,14 @@ window.preload = function () {
 
 window.setup = function () {
     createCanvas(windowWidth, windowHeight);
-    background(255);
+    background(0);
+
+    let tileSize = windowHeight/8;
+    let corner = createVector((windowWidth - (tileSize * 8))/2, 0);
     
-    let test = createVector(100, 250);
+    let test = new game.Game(players["Anne Passant"], players["Ophelia Truthy"], corner, tileSize);
 
-    stroke(255);
-    fill(0);
-    circle(test.x, test.y, 50);
-
-    game.newGame();
+    test.drawToCanvas();
 }
 
 window.draw = function () {

@@ -483,3 +483,23 @@ export function toDisplayString(board) {
 
     return boardString;
 }
+
+export function toCanvasTiles(board, boardCorner, tileSize) {
+    let gameBoard = board.gameBoard;
+    let tiles = [];
+
+    for (let x = gameBoard.length - 1; x > -1; x--) {
+        for (let y = 0; y < gameBoard.length; y++) {
+            let piece = gameBoard[x][y];
+            if (piece != null) {
+                tiles.push({
+                    x: boardCorner.x + (x * tileSize),
+                    y: boardCorner.y + (y * tileSize),
+                    img: piece.image
+                });
+            }
+        }
+    }
+
+    return tiles;
+}
