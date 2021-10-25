@@ -43,9 +43,10 @@ export function doEvent(board, event) {
                     eval(enchant.effect)(event, board);
                 } 
                 if (enchant.trigger === enU.TRIGGERS.ON_CAPTURE && event.captured !== null) {
+                    let enchantFunction = eval(enchant.effect);
                     console.log(event);
                     console.log(eval(enchant.effect));
-                    eval(enchant.effect)(event, board);
+                    enchantFunction(event, board);
                 }
             })
 
