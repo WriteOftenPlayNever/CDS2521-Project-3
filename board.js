@@ -493,9 +493,12 @@ export function toCanvasTiles(board, boardCorner, tileSize) {
             let piece = gameBoard[x][y];
             if (piece != null) {
                 tiles.push({
+                    xIndex: x,
+                    yIndex: y,
                     x: boardCorner.x + (x * tileSize),
                     y: boardCorner.y + (y * tileSize),
-                    img: piece.image
+                    img: piece.image,
+                    grabbed: false
                 });
             }
         }

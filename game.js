@@ -29,9 +29,11 @@ export class Game {
         this.onyxPlayer = onyxPlayer;
         this.boardCorner = boardCorner;
         this.tileSize = tileSize;
-        this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
 
+        this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
         bU.initialise(this.board, pearlPlayer, onyxPlayer);
+
+        this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
     }
 
     drawToCanvas() {
@@ -49,19 +51,53 @@ export class Game {
             }
         }
 
-        bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize).forEach(tile => {
+        this.tiles.forEach(tile => {
             loadImage(tile.img, tImg => {
                 if (tImg.width > tImg.height) {
                     tImg.resize(this.tileSize * 0.9, 0);
                 } else {
                     tImg.resize(0, this.tileSize * 0.9);
                 }
-                let xOffset = (this.tileSize - tImg.width)/2;
-                let yOffset = (this.tileSize - tImg.height)/2;
-                image(tImg, tile.x + xOffset, tile.y + yOffset);
+
+                if (tile.grabbed) {
+                    image(tImg, mouseX, mouseY);
+                } else {
+                    let xOffset = (this.tileSize - tImg.width)/2;
+                    let yOffset = (this.tileSize - tImg.height)/2;
+                    image(tImg, tile.x + xOffset, tile.y + yOffset);
+                }
             });
         });
     }
+
+    mousePressed() {
+        let boardPosition = this.positionToIndex(mouseX, mouseY);
+        
+        this.tiles.forEach(tile => {
+            if (tile.xIndex === boardPosition.x && tile.yIndex === boardPosition.y) {
+                tile.grabbed = true;
+            }
+        });
+    }
+
+    mouseReleased() {
+        this.tiles.forEach(tile => {
+            tile.grabbed = false;
+        });
+    }
+
+    positionToIndex(x, y) {
+        let posVector = p5.Vector.sub(createVector(x, y), this.boardCorner);
+        
+        let xIndex = Math.floor(posVector.x / this.tileSize);
+        let yIndex = Math.floor(posVector.y / this.tileSize);
+
+        return {
+            x: xIndex,
+            y: yIndex
+        }
+    }
+    
 }
 
 
