@@ -1,6 +1,7 @@
 import * as rs from "./resources.js";
 import * as bU from "./board.js";
 import * as evU from "./event.js";
+import * as eU from "./enchantment.js";
 import * as pU from "./piece.js";
 import { players } from "./players.js";
 import { Evaluator } from "./evaluator.js";
@@ -34,6 +35,16 @@ export class Game {
         bU.initialise(this.board, pearlPlayer, onyxPlayer);
 
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
+
+        let gameBoard = this.board.gameBoard;
+        for (let x = gameBoard.length - 1; x > -1; x--) {
+            for (let y = 0; y < gameBoard.length; y++) {
+                let piece = gameBoard[x][y];
+                if (piece !== null) {
+                    piece.enchantments.push(eU.DIG_SITE);
+                }
+            }
+        }
     }
 
     handleGameEvent(event) {
