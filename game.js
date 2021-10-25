@@ -74,12 +74,18 @@ export class Game {
                             }
                             for (let t = 0; t < 100; t++) {
                                 // console.log("time test");
-                                // setTimeout((tile, beginning, movement) => {
-                                //     let travelled = movement.mult((t + 1)/100);
-                                //     let currentLocation = beginning.add(travelled);
-                                //     tile.x = currentLocation.x;
-                                //     tile.y = currentLocation.y;
-                                // }, t * 10, tile, beginning.copy(), movement.copy());
+                                setTimeout((tile, beginning, movement) => {
+                                    let travelled = {
+                                        x: movement.x * (t + 1)/100,
+                                        y: movement.y * (t + 1)/100
+                                    }
+                                    let currentLocation = {
+                                        x: beginning.x + travelled.x,
+                                        y: beginning.y + travelled.y
+                                    }
+                                    tile.x = currentLocation.x;
+                                    tile.y = currentLocation.y;
+                                }, t * 10, tile, rs.objCopy(beginning), rs.objCopy(movement));
 
                                 
                             }
@@ -99,6 +105,8 @@ export class Game {
 
                     }
         
+                    
+                    this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
                     break;
                 default:
                     break;
