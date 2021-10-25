@@ -48,6 +48,12 @@ export class Game {
                 }
             }
         }
+
+        bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize).forEach(tile => {
+            loadImage(tile.img, tImg => {
+                image(tImg, tile.x, tile.y, this.tileSize, this.tileSize);
+            });
+        });
     }
 }
 

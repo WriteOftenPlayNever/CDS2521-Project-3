@@ -7,7 +7,7 @@ window.preload = function () {
 
 window.setup = function () {
     createCanvas(windowWidth, windowHeight);
-    background(0);
+    background(255);
 
     let tileSize = windowHeight/8;
     let corner = createVector((windowWidth - (tileSize * 8))/2, 0);
