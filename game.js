@@ -65,8 +65,8 @@ export class Game {
                                 y: tile.y
                             }
                             let destination = {
-                                x: this.boardCorner + event.to[0] * this.tileSize,
-                                y: this.boardCorner + event.to[1] * this.tileSize
+                                x: this.boardCorner.x + event.to[0] * this.tileSize,
+                                y: this.boardCorner.y + event.to[1] * this.tileSize
                             }
                             let movement = {
                                 x: destination.x - beginning.x,
