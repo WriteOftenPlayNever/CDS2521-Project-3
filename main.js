@@ -11,6 +11,7 @@ function setup() {
     let test = createVector(200, 250);
 
     stroke(255);
+    fill(0);
     circle(test.x, test.y, randInt(20, 80));
 
     image(img, 0, 0, 200, 200);
