@@ -1,12 +1,12 @@
 
-const EVENT_TYPES = {
+export const EVENT_TYPES = {
     CREATE: 0,
     MOVE: 1,
     COMMENTARY: 3
 }
 
 
-function newCreation(piece, captured, to, isRest) {
+export function newCreation(piece, captured, to, isRest) {
     return {
         type: EVENT_TYPES.CREATE,
         rest: isRest,
@@ -17,7 +17,7 @@ function newCreation(piece, captured, to, isRest) {
     }
 }
 
-function newMove(piece, captured, from, to, isRest) {
+export function newMove(piece, captured, from, to, isRest) {
     return {
         type: EVENT_TYPES.MOVE,
         rest: isRest,
@@ -29,7 +29,7 @@ function newMove(piece, captured, from, to, isRest) {
     }
 }
 
-function newCommentary(description, isRest) {
+export function newCommentary(description, isRest) {
     return {
         type: EVENT_TYPES.COMMENTARY,
         rest: isRest,
@@ -41,7 +41,7 @@ function newCommentary(description, isRest) {
     }
 }
 
-function newEvent(type, isRest, description, piece, captured, from, to) {
+export function newEvent(type, isRest, description, piece, captured, from, to) {
     return {
         type: type,
         rest: isRest,
@@ -51,11 +51,4 @@ function newEvent(type, isRest, description, piece, captured, from, to) {
         from: from,
         to: to
     }
-}
-
-
-module.exports = {
-    newMove,
-    newCreation,
-    EVENT_TYPES
 }

@@ -1,11 +1,10 @@
-const rs = require("./resources.js");
-const bU = require("./board.js");
-const evU = require("./event.js");
-const { Worker } = require("worker_threads");
+import * as rs from "./resources";
+import * as bU from "./board.js";
+import * as evU from "./event.js";
 
 
 
-class Evaluator {
+export class Evaluator {
     constructor(inBoard, player, givenMoves) {
         this.board = rs.objCopy(inBoard);
         this.player = player;
@@ -521,34 +520,4 @@ class Evaluator {
     
         return bestMove;
     }
-}
-
-
-function workerTest(board, player) {
-    const worker = new Worker("./js/evalWorker.js", { workerData: { inBoard: board, player: player, givenMoves: null }});
-    
-    console.log("YOTE?");
-
-    let retVal = undefined;
-
-    worker.on("message", theData => {
-        console.log(JSON.stringify(theData));
-        retVal = theData;
-    });
-
-    worker.on("exit", _ => console.log("done!"));
-
-    while(retVal == undefined) {
-        // wait lol
-    }
-
-    return retVal;
-}
-
-
-workerTest()
-
-module.exports = {
-    workerTest,
-    // Evaluator
 }

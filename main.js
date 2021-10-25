@@ -1,7 +1,7 @@
-let img;
+
 
 function preload() {
-    img = loadImage('img/onyx/druid.png');
+    
 }
 
 function setup() {
@@ -12,11 +12,10 @@ function setup() {
 
     stroke(255);
     fill(0);
-    circle(test.x, test.y, randInt(20, 80));
+    circle(test.x, test.y, 50);
 
-    image(img, 0, 0, 200, 200);
 
-    
+    createGame(0, 0);
 }
 
 function draw() {

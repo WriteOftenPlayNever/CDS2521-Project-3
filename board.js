@@ -1,12 +1,12 @@
-const rs = require("./resources.js");
-const piU = require("./piece.js");
-const dU = require("./deviation.js");
-const evU = require("./event.js");
-const enU = require("./enchantment.js");
+import * as rs from "./resources";
+import * as piU from "./piece.js";
+import * as dU from "./deviation.js";
+import * as evU from "./event.js";
+import * as enU from "./enchantment.js";
 
 
 
-function doEvent(board, event) {
+export function doEvent(board, event) {
     let from = event.from;
     let to = event.to;
 
@@ -60,7 +60,7 @@ function doEvent(board, event) {
     }
 }
 
-function undoLastEvent(board) {
+export function undoLastEvent(board) {
     let event = board.eventList.pop();
 
     if (event === undefined) {
@@ -120,12 +120,12 @@ function undoLastEvent(board) {
     return event;
 }
 
-function undoLastMove(board) {
+export function undoLastMove(board) {
     while (undoLastEvent(board).rest === false);
 }
 
 
-function getMoves(board, affiliation) {
+export function getMoves(board, affiliation) {
     let moves = [];
     let gameBoard = board.gameBoard;
 
@@ -196,7 +196,7 @@ function getMoves(board, affiliation) {
     return moves;
 }
 
-function getAttacks(board, affiliation) {
+export function getAttacks(board, affiliation) {
     let attacks = [];
     let gameBoard = board.gameBoard;
 
@@ -243,7 +243,7 @@ function getAttacks(board, affiliation) {
     return attacks;
 }
 
-function getMovesAt(board, x, y) {
+export function getMovesAt(board, x, y) {
     let gameBoard = board.gameBoard;
     let piece = gameBoard[x][y];
     let moves = [];
@@ -276,7 +276,7 @@ function getMovesAt(board, x, y) {
     })
 }
 
-function getAttacksAt(board, x, y) {
+export function getAttacksAt(board, x, y) {
     let gameBoard = board.gameBoard;
     let piece = gameBoard[x][y];
     let moves = [];
@@ -311,7 +311,7 @@ function getAttacksAt(board, x, y) {
     })
 }
 
-function getDefendsAt(board, x, y) {
+export function getDefendsAt(board, x, y) {
     let gameBoard = board.gameBoard;
     let piece = gameBoard[x][y];
     let moves = [];
@@ -346,7 +346,7 @@ function getDefendsAt(board, x, y) {
     })
 }
 
-function getMADat(board, x, y) {
+export function getMADat(board, x, y) {
     let gameBoard = board.gameBoard;
     let piece = gameBoard[x][y];
     let MAD = [[], [], []];
@@ -388,7 +388,7 @@ function getMADat(board, x, y) {
 
 
 
-function newBoard(boardSize) {
+export function newBoard(boardSize) {
     let tiles = [];
     for (let i = 0; i < boardSize; i++) {
         let file = [];
@@ -410,7 +410,7 @@ function newBoard(boardSize) {
     return setup;
 }
 
-function initialise(board, pearlPlayer, onyxPlayer) {
+export function initialise(board, pearlPlayer, onyxPlayer) {
     let gameBoard = board.gameBoard;
 
     // PEARL PAWNS
@@ -468,7 +468,7 @@ function initialise(board, pearlPlayer, onyxPlayer) {
     });
 }
 
-function toDisplayString(board) {
+export function toDisplayString(board) {
     let gameBoard = board.gameBoard;
     let boardString = "";
 
@@ -482,16 +482,4 @@ function toDisplayString(board) {
     }
 
     return boardString;
-}
-
-
-module.exports = {
-    doEvent,
-    undoLastEvent,
-    newBoard,
-    initialise,
-    getMoves,
-    getAttacks,
-    getMADat,
-    toDisplayString
 }

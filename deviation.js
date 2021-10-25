@@ -1,6 +1,6 @@
 
 
-const ACTIVATION = {
+export const ACTIVATION = {
     START_GAME: 0,
     END_TURN: 1,
     END_GAME: 2
@@ -9,7 +9,7 @@ const ACTIVATION = {
 // devation effect function template game => ()
 
 
-function newDeviation(name, description, activation, effect) {
+export function newDeviation(name, description, activation, effect) {
     return {
         name: name,
         description: description,
@@ -18,7 +18,3 @@ function newDeviation(name, description, activation, effect) {
     }
 }
 
-
-module.exports = {
-    ACTIVATION
-}

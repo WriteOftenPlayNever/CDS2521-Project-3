@@ -1,35 +1,7 @@
-const fs = require("fs");
-const rs = require("./resources.js");
+import * as rs from "./resources.js";
 
 
-
-const readPlayer = (fullName) => {
-    let player = null;
-
-    try {
-        player = JSON.parse(fs.readFileSync("./players/" + fullName + ".txt", "utf8"));
-    } catch (error) {
-        console.log("Couldn't find a player by the name of " + fullName);
-    }
-
-    return player;
-}
-
-const savePlayer = (player) => {
-    try {
-        fs.writeFileSync("./players/" + player.firstName + " " + player.lastName + ".txt", JSON.stringify(player));
-    } catch (error) {
-        console.log("Couldn't save player: " + player.firstName + " " + player.lastName + " with error: " + error.toString());
-    }
-}
-
-
-//let otherCollated = [<<count>>, otherMoveCount, otherAttackCount, otherDefendCount,
-//    otherAdjacency, <<target distance>>, otherFileCount, otherRankCount];
-
-// weights go: value, mobility, attacks, defends, adjacent count, prior moves, target distance, file count, rank count
-
-function generatePlayer(name) {
+export function generatePlayer(name) {
     let g = (min, max) => Math.floor(rs.grandom(min, max));
 
     let a1 = n => n === 0 ? [] : [g(-100, 100)].concat(a1(n - 1));
@@ -96,37 +68,11 @@ function generatePlayer(name) {
         openings: {}
     }
 
-    savePlayer(thePlayer);
-
     return thePlayer;
 }
 
 
-function createRandomPlayer() {
-    let names = fs.readFileSync("./players/names.txt", "utf8").split("\n");
 
-    let index = rs.randInt(0, names.length);
-    let name = names.splice(index, 1)[0].trim();
-
-    try {
-        fs.writeFileSync("./players/names.txt", names.join("\n"));
-    } catch (error) {
-        console.log(error.toString());
-    }
-
-    console.log(name);
-
-    generatePlayer(name);
-
-    return name;
-}
-
-module.exports = {
-    generatePlayer,
-    createRandomPlayer,
-    readPlayer,
-    savePlayer
-}
 
 
 
