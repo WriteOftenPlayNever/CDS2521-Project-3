@@ -267,12 +267,7 @@ export function getMovesAt(board, x, y) {
                 let destinationPiece = gameBoard[destinationX][destinationY];
                 
                 if (destinationPiece === null) {
-                    console.log([[x, y], [destinationX, destinationY]]);
-                    let moveEvent = evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true);
-
-                    console.log(moveEvent);
-
-                    moves.push(moveEvent);
+                    moves.push(evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true));
                 } else {
                     break;
                 }
@@ -501,8 +496,7 @@ export function toCanvasTiles(board, boardCorner, tileSize) {
         for (let y = 0; y < gameBoard.length; y++) {
             let piece = gameBoard[x][y];
             if (piece != null) {
-                console.log(JSON.stringify(getMovesAt(board, x, y)));
-
+                
                 let newTile = {
                     xIndex: x,
                     yIndex: y,

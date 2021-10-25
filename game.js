@@ -36,6 +36,54 @@ export class Game {
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
     }
 
+    handleGameEvent(event) {
+        let eventCount = this.board.eventList.length;
+
+        bU.doEvent(this.board, event);
+
+        for(let i = eventCount; i < this.board.eventList.length; i++) {
+            switch (event.type) {
+                case evU.EVENT_TYPES.CREATE:
+                    this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
+
+                    this.tiles.forEach(tile => {
+                        if (tile.xIndex === event.to[0], tile.yIndex === event.to[1]) {
+                            for (let t = 0; t < 100; t++) {
+                                setTimeout(rs.setImageAlpha, t * 10, tile.img, (t + 1)/100);
+                            }
+                        }
+                    });
+
+                    break;
+                case evU.EVENT_TYPES.MOVE:
+                    this.tiles.forEach(tile => {
+                        if (tile.xIndex === event.from[0], tile.yIndex === event.from[1]) {
+                            let beginning = createVector(tile.x, tile.y);
+                            let destination = createVector(this.boardCorner + tile.xIndex * this.tileSize,
+                                this.boardCorner + tile.yIndex * this.tileSize);
+                            let movement = p5.PVector.sub(destination, beginning);
+                            for (let t = 0; t < 100; t++) {
+                                setTimeout((tile, beginning, movement) => {
+                                    let travelled = p5.PVector.mult(movement, (t + 1)/100);
+                                    let currentLocation = p5.PVector.add(beginning, travelled);
+                                    tile.x = currentLocation.x;
+                                    tile.y = currentLocation.y;
+                                }, t * 10, tile, beginning, movement);
+                            }
+                        }
+                    });
+
+                    if (event.captured !== null) {
+
+                    }
+        
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     drawToCanvas() {
         noStroke();
         let gameBoard = this.board.gameBoard;
@@ -85,20 +133,16 @@ export class Game {
             if (tile.grabbed) {
                 tile.grabbed = false;
 
-                console.log(JSON.stringify(boardPosition));
-
                 let pieceMoves = bU.getMovesAt(this.board, tile.xIndex, tile.yIndex);
                 let pieceAttacks = bU.getAttacksAt(this.board, tile.xIndex, tile.yIndex);
 
                 pieceMoves.forEach(move => {
-                    console.log(JSON.stringify(move.to));
                     if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
                         bU.doEvent(this.board, move);
                     }
                 });
 
                 pieceAttacks.forEach(attack => {
-                    console.log(JSON.stringify(attack.to));
                     if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
                         bU.doEvent(this.board, attack);
                     }
