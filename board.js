@@ -279,6 +279,8 @@ export function getMovesAt(board, x, y) {
             }
         }
     })
+
+    return moves;
 }
 
 export function getAttacksAt(board, x, y) {
@@ -314,6 +316,8 @@ export function getAttacksAt(board, x, y) {
             }
         }
     })
+
+    return moves;
 }
 
 export function getDefendsAt(board, x, y) {
