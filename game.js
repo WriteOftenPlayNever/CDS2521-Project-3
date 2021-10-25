@@ -58,11 +58,14 @@ export class Game {
                 case evU.EVENT_TYPES.MOVE:
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.from[0], tile.yIndex === event.from[1]) {
+                            console.log("It found the right tile");
+
                             let beginning = createVector(tile.x, tile.y);
                             let destination = createVector(this.boardCorner + tile.xIndex * this.tileSize,
                                 this.boardCorner + tile.yIndex * this.tileSize);
                             let movement = p5.PVector.sub(destination, beginning);
                             for (let t = 0; t < 100; t++) {
+                                console.log("time test");
                                 setTimeout((tile, beginning, movement) => {
                                     let travelled = p5.PVector.mult(movement, (t + 1)/100);
                                     let currentLocation = p5.PVector.add(beginning, travelled);
@@ -136,13 +139,13 @@ export class Game {
 
                 pieceMoves.forEach(move => {
                     if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
-                        handleGameEvent(move);
+                        this.handleGameEvent(move);
                     }
                 });
 
                 pieceAttacks.forEach(attack => {
                     if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
-                        handleGameEvent(attack);
+                        this.handleGameEvent(attack);
                     }
                 });
             }
