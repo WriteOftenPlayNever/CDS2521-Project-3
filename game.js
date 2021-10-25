@@ -7,7 +7,7 @@ import { Evaluator } from "./evaluator.js";
 
 
 
-function createGame(userPlayerName, CPUPlayerName) {
+export function createGame(userPlayerName, CPUPlayerName) {
     console.log("GAME CREATED");
 }
 

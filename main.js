@@ -1,10 +1,10 @@
+import * as game from "./game/js";
 
-
-function preload() {
+window.preload = function () {
     
 }
 
-function setup() {
+window.setup = function () {
     createCanvas(windowWidth, windowHeight);
     background(255);
     
@@ -15,9 +15,9 @@ function setup() {
     circle(test.x, test.y, 50);
 
 
-    createGame(0, 0);
+    game.createGame(0, 0);
 }
 
-function draw() {
+window.draw = function () {
 
 }
