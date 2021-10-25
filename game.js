@@ -117,8 +117,6 @@ export class Game {
         let boardPosition = this.positionToIndex(mouseX, mouseY);
 
 
-        console.log(JSON.stringify(boardPosition));
-        
         this.tiles.forEach(tile => {
             if (tile.xIndex === boardPosition.x && tile.yIndex === boardPosition.y) {
                 tile.grabbed = true;
@@ -138,13 +136,13 @@ export class Game {
 
                 pieceMoves.forEach(move => {
                     if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
-                        bU.doEvent(this.board, move);
+                        handleGameEvent(move);
                     }
                 });
 
                 pieceAttacks.forEach(attack => {
                     if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
-                        bU.doEvent(this.board, attack);
+                        handleGameEvent(attack);
                     }
                 });
             }
