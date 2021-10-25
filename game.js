@@ -41,10 +41,10 @@ export class Game {
             for (let y = 0; y < gameBoard.length; y++) {
                 if ((x + y) % 2 === 0) {
                     fill(255, 218, 179);
-                    square(this.boardCorner + (x * this.tileSize), this.tileSize);
+                    square(this.boardCorner.x + (x * this.tileSize), this.boardCorner.y + (y * this.tileSize), this.tileSize);
                 } else {
                     fill(255);
-                    square(this.boardCorner + (y * this.tileSize), this.tileSize);
+                    square(this.boardCorner.x + (x * this.tileSize), this.boardCorner.y + (y * this.tileSize), this.tileSize);
                 }
             }
         }
