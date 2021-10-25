@@ -1,4 +1,4 @@
-import * as rs from "./resources";
+import * as rs from "./resources.js";
 import * as bU from "./board.js";
 import * as evU from "./event.js";
 

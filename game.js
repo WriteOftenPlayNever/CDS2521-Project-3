@@ -3,7 +3,7 @@ import * as bU from "./board.js";
 import * as evU from "./event.js";
 import * as pU from "./piece.js";
 import { players } from "./players.js";
-import { Evaluator } from "./evaluator";
+import { Evaluator } from "./evaluator.js";
 
 
 
