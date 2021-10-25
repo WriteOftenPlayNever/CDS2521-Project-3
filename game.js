@@ -57,7 +57,7 @@ export class Game {
                     break;
                 case evU.EVENT_TYPES.MOVE:
                     this.tiles.forEach(tile => {
-                        if (tile.xIndex === event.from[0], tile.yIndex === event.from[1]) {
+                        if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
                             console.log("It found the right tile " + tile.xIndex + " " + tile.yIndex);
 
                             let beginning = createVector(tile.x, tile.y);
