@@ -303,7 +303,7 @@ export function getAttacksAt(board, x, y) {
                 let destinationPiece = gameBoard[destinationX][destinationY];
                 
                 if (destinationPiece !== null) {
-                    if (destinationPiece.affiliation !== affiliation) {
+                    if (destinationPiece.affiliation !== piece.affiliation) {
                         moves.push(evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true));
                     }
                     break;
