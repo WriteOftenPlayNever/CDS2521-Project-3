@@ -268,7 +268,11 @@ export function getMovesAt(board, x, y) {
                 
                 if (destinationPiece === null) {
                     console.log([[x, y], [destinationX, destinationY]]);
-                    moves.push(evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true));
+                    let moveEvent = evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true);
+
+                    console.log(moveEvent);
+
+                    moves.push(moveEvent);
                 } else {
                     break;
                 }
