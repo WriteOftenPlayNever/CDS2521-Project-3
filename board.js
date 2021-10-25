@@ -492,14 +492,26 @@ export function toCanvasTiles(board, boardCorner, tileSize) {
         for (let y = 0; y < gameBoard.length; y++) {
             let piece = gameBoard[x][y];
             if (piece != null) {
-                tiles.push({
+                let newTile = {
                     xIndex: x,
                     yIndex: y,
                     x: boardCorner.x + (x * tileSize),
                     y: boardCorner.y + (y * tileSize),
-                    img: piece.image,
+                    img: null,
                     grabbed: false
+                };
+
+                loadImage(piece.image, tImg => {
+                    if (tImg.width > tImg.height) {
+                        tImg.resize(this.tileSize * 0.9, 0);
+                    } else {
+                        tImg.resize(0, this.tileSize * 0.9);
+                    }
+
+                    newTile.img = tImg;
                 });
+                
+                tiles.push(newTile);
             }
         }
     }
