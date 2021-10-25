@@ -33,7 +33,7 @@ export function newGame() {
         onyx: onyxPlayer
     }
 
-    circle(200, 100, 0);
+    circle(200, 100, 100);
 
     bU.initialise(game.board, pearlPlayer, onyxPlayer);
 
