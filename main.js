@@ -13,11 +13,11 @@ function setup() {
     let test = createVector(200, 250);
 
     stroke(255);
-    circle(test.x, test.y, 50);
+    circle(test.x, test.y, randInt(20, 80));
 
     image(img, 0, 0, 200, 200);
 
-    console.log(randInt(0, 100));
+    
 }
 
 function draw() {
