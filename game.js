@@ -53,12 +53,14 @@ export class Game {
 
         this.tiles.forEach(tile => {
             let tImg = tile.img;
-            if (tile.grabbed) {
-                image(tImg, mouseX - (tImg.width / 2), mouseY - (tImg.height / 2));
-            } else {
-                let xOffset = (this.tileSize - tImg.width)/2;
-                let yOffset = (this.tileSize - tImg.height)/2;
-                image(tImg, tile.x + xOffset, tile.y + yOffset);
+            if (tImg) {
+                if (tile.grabbed) {
+                    image(tImg, mouseX - (tImg.width / 2), mouseY - (tImg.height / 2));
+                } else {
+                    let xOffset = (this.tileSize - tImg.width)/2;
+                    let yOffset = (this.tileSize - tImg.height)/2;
+                    image(tImg, tile.x + xOffset, tile.y + yOffset);
+                }
             }
         });
     }
