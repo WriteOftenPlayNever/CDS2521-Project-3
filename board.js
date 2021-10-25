@@ -503,14 +503,14 @@ export function toCanvasTiles(board, boardCorner, tileSize) {
 
                 loadImage(piece.image, tImg => {
                     if (tImg.width > tImg.height) {
-                        tImg.resize(this.tileSize * 0.9, 0);
+                        tImg.resize(tileSize * 0.9, 0);
                     } else {
-                        tImg.resize(0, this.tileSize * 0.9);
+                        tImg.resize(0, tileSize * 0.9);
                     }
 
                     newTile.img = tImg;
                 });
-                
+
                 tiles.push(newTile);
             }
         }

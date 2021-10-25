@@ -4,17 +4,16 @@ import { players } from "./players.js";
 let GAME_INSTANCE;
 
 window.preload = function() {
-    
+    let tileSize = windowHeight/8;
+    let corner = createVector((windowWidth - (tileSize * 8))/2, 0);
+
+    GAME_INSTANCE = new game.Game(players["Anne Passant"], players["Ophelia Truthy"], corner, tileSize);
 }
 
 window.setup = function() {
     createCanvas(windowWidth, windowHeight);
     background(255);
-
-    let tileSize = windowHeight/8;
-    let corner = createVector((windowWidth - (tileSize * 8))/2, 0);
     
-    GAME_INSTANCE = new game.Game(players["Anne Passant"], players["Ophelia Truthy"], corner, tileSize);
 
     GAME_INSTANCE.drawToCanvas();
 }
