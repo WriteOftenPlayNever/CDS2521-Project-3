@@ -82,8 +82,8 @@ export class Game {
             if (tile.grabbed) {
                 tile.grabbed = false;
 
-                let pieceMoves = bU.getMovesAt(this.board, boardPosition.x, boardPosition.y);
-                let pieceAttacks = bU.getAttacksAt(this.board, boardPosition.x, boardPosition.y);
+                let pieceMoves = bU.getMovesAt(this.board, tile.xIndex, tile.yIndex);
+                let pieceAttacks = bU.getAttacksAt(this.board, tile.xIndex, tile.yIndex);
 
                 pieceMoves.forEach(move => {
                     if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
