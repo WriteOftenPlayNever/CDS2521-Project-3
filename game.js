@@ -92,11 +92,13 @@ export class Game {
 
                             console.log(destination);
 
-                            setTimeout((tile) => {
+                            setTimeout((tile, game) => {
                                 tile.x = destination.x;
                                 tile.y = destination.y;
 
                                 console.log(tile.x + " " + tile.y);
+
+                                game.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
                             }, 1000, tile);
                         }
                     });
@@ -112,7 +114,6 @@ export class Game {
                     }
         
                     
-                    this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
                     break;
                 default:
                     break;
