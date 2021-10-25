@@ -492,6 +492,8 @@ export function toCanvasTiles(board, boardCorner, tileSize) {
         for (let y = 0; y < gameBoard.length; y++) {
             let piece = gameBoard[x][y];
             if (piece != null) {
+                console.log(JSON.stringify(getMovesAt(board, x, y)));
+
                 let newTile = {
                     xIndex: x,
                     yIndex: y,

@@ -29,8 +29,8 @@ export class Game {
         this.onyxPlayer = onyxPlayer;
         this.boardCorner = boardCorner;
         this.tileSize = tileSize;
-
         this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
+        
         bU.initialise(this.board, pearlPlayer, onyxPlayer);
 
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);

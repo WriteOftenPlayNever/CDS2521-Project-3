@@ -18,6 +18,8 @@ window.setup = function() {
     console.log(bU.getMovesAt(GAME_INSTANCE.board, 0, 1));
     console.log(bU.getMovesAt(GAME_INSTANCE.board, 1, 0));
 
+    console.log(GAME_INSTANCE.board);
+
     GAME_INSTANCE.drawToCanvas();
 }
 
