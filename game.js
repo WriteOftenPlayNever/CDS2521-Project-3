@@ -28,7 +28,6 @@ export function newGame() {
     let onyxPlayer = players["Json Smythe"];
 
     let game = {
-        id: rs.guid(),
         board: bU.newBoard(8, pearlPlayer, onyxPlayer),
         pearl: pearlPlayer,
         onyx: onyxPlayer
