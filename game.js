@@ -82,18 +82,22 @@ export class Game {
             if (tile.grabbed) {
                 tile.grabbed = false;
 
+                console.log(JSON.stringify(boardPosition));
+
                 let pieceMoves = bU.getMovesAt(this.board, tile.xIndex, tile.yIndex);
                 let pieceAttacks = bU.getAttacksAt(this.board, tile.xIndex, tile.yIndex);
 
                 pieceMoves.forEach(move => {
+                    console.log(JSON.stringify(move.to));
                     if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
-                        bU.doEvent(move);
+                        bU.doEvent(this.board, move);
                     }
                 });
 
                 pieceAttacks.forEach(attack => {
+                    console.log(JSON.stringify(attack.to));
                     if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
-                        bU.doEvent(attack);
+                        bU.doEvent(this.board, attack);
                     }
                 });
             }
