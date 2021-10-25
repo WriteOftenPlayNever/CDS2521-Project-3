@@ -44,7 +44,7 @@ export class Game {
         for(let i = eventCount; i < this.board.eventList.length; i++) {
             switch (event.type) {
                 case evU.EVENT_TYPES.CREATE:
-                    this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
+                    this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
 
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.to[0], tile.yIndex === event.to[1]) {
@@ -102,11 +102,17 @@ export class Game {
                     });
 
                     if (event.captured !== null) {
-
+                        this.tiles.forEach(tile => {
+                            if (tile.xIndex === event.to[0], tile.yIndex === event.to[1]) {
+                                for (let t = 0; t < 100; t++) {
+                                    setTimeout(rs.setImageAlpha, t * 10, tile.img, (t + 1)/100);
+                                }
+                            }
+                        });
                     }
         
                     
-                    this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
+                    this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
                     break;
                 default:
                     break;
