@@ -107,7 +107,7 @@ export class Game {
                         this.tiles.forEach(tile => {
                             if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
                                 for (let t = 0; t < 100; t++) {
-                                    setTimeout(rs.setImageAlpha, t * 3, tile.img, (t + 1)/100);
+                                    setTimeout(rs.setImageAlpha, t * 3, tile.img, (100 - t + 1)/100);
                                 }
                             }
                         });
