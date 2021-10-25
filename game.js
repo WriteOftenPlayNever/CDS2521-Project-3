@@ -7,8 +7,39 @@ import { Evaluator } from "./evaluator.js";
 
 
 
-export function createGame(userPlayerName, CPUPlayerName) {
-    console.log("GAME CREATED");
+// export function newGame(pearlPlayer, onyxPlayer) {
+//     let game = {
+//         id: rs.guid(),
+//         board: bU.newBoard(8, pearlPlayer, onyxPlayer),
+//         pearl: pearlPlayer,
+//         onyx: onyxPlayer
+//     }
+
+//     circle(200, 100, 0);
+
+//     bU.initialise(game.board, pearlPlayer, onyxPlayer);
+
+//     return game;
+// }
+
+
+export function newGame() {
+    let pearlPlayer = players["Anne Passant"];
+    let onyxPlayer = players["Json Smythe"];
+
+    let game = {
+        id: rs.guid(),
+        board: bU.newBoard(8, pearlPlayer, onyxPlayer),
+        pearl: pearlPlayer,
+        onyx: onyxPlayer
+    }
+
+    circle(200, 100, 0);
+
+    bU.initialise(game.board, pearlPlayer, onyxPlayer);
+
+    return game;
 }
+
 
 
