@@ -1,4 +1,5 @@
 import * as game from "./game.js";
+import * as bU from "./board.js";
 import { players } from "./players.js";
 
 let GAME_INSTANCE;
@@ -14,6 +15,8 @@ window.setup = function() {
     createCanvas(windowWidth, windowHeight);
     background(255);
     
+    console.log(bU.getMovesAt(GAME_INSTANCE.board, 0, 1));
+    console.log(bU.getMovesAt(GAME_INSTANCE.board, 1, 0));
 
     GAME_INSTANCE.drawToCanvas();
 }
