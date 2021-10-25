@@ -36,7 +36,7 @@ export class Game {
 
     drawToCanvas() {
         noStroke();
-        let gameBoard = board.gameBoard;
+        let gameBoard = this.board.gameBoard;
         for (let x = gameBoard.length - 1; x > -1; x--) {
             for (let y = 0; y < gameBoard.length; y++) {
                 if ((x + y) % 2 === 0) {
