@@ -287,7 +287,7 @@ export function getAttacksAt(board, x, y) {
         return moves;
     }
 
-    let mp = piece.movePattern;
+    let mp = piece.attackPattern;
 
     mp.movement.forEach(movementType => {
         for (let i = 1; i <= mp.range; i++) {
