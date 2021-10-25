@@ -76,9 +76,29 @@ export class Game {
     }
 
     mouseReleased() {
+        let boardPosition = this.positionToIndex(mouseX, mouseY);
+
         this.tiles.forEach(tile => {
-            tile.grabbed = false;
+            if (tile.grabbed) {
+                tile.grabbed = false;
+
+                let pieceMoves = bU.getMovesAt(this.board, boardPosition.x, boardPosition.y);
+                let pieceAttacks = bU.getAttacksAt(this.board, boardPosition.x, boardPosition.y);
+
+                pieceMoves.forEach(move => {
+                    if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
+                        bU.doEvent(move);
+                    }
+                });
+
+                pieceAttacks.forEach(attack => {
+                    if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
+                        bU.doEvent(attack);
+                    }
+                });
+            }
         });
+
     }
 
     positionToIndex(x, y) {
