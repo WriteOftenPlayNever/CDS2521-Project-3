@@ -63,15 +63,15 @@ export class Game {
                             let beginning = createVector(tile.x, tile.y);
                             let destination = createVector(this.boardCorner + tile.xIndex * this.tileSize,
                                 this.boardCorner + tile.yIndex * this.tileSize);
-                            let movement = p5.PVector.sub(destination, beginning);
+                            let movement = createVector(destination.x - beginning.x, destination.y - beginning.y);
                             for (let t = 0; t < 100; t++) {
                                 console.log("time test");
                                 setTimeout((tile, beginning, movement) => {
-                                    let travelled = p5.PVector.mult(movement, (t + 1)/100);
-                                    let currentLocation = p5.PVector.add(beginning, travelled);
+                                    let travelled = movement.mult((t + 1)/100);
+                                    let currentLocation = beginning.add(travelled);
                                     tile.x = currentLocation.x;
                                     tile.y = currentLocation.y;
-                                }, t * 10, tile, beginning, movement);
+                                }, t * 10, tile, beginning.copy(), movement.copy());
                             }
                         }
                     });
