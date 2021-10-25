@@ -1,4 +1,4 @@
-import * as game from "./game/js";
+import * as game from "./game.js";
 
 window.preload = function () {
     
