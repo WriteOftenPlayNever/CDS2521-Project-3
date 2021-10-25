@@ -58,20 +58,25 @@ export class Game {
                 case evU.EVENT_TYPES.MOVE:
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.from[0], tile.yIndex === event.from[1]) {
-                            console.log("It found the right tile");
+                            console.log("It found the right tile " + tile.xIndex + " " + tile.yIndex);
 
                             let beginning = createVector(tile.x, tile.y);
                             let destination = createVector(this.boardCorner + tile.xIndex * this.tileSize,
                                 this.boardCorner + tile.yIndex * this.tileSize);
                             let movement = createVector(destination.x - beginning.x, destination.y - beginning.y);
                             for (let t = 0; t < 100; t++) {
-                                console.log("time test");
-                                setTimeout((tile, beginning, movement) => {
-                                    let travelled = movement.mult((t + 1)/100);
-                                    let currentLocation = beginning.add(travelled);
-                                    tile.x = currentLocation.x;
-                                    tile.y = currentLocation.y;
-                                }, t * 10, tile, beginning.copy(), movement.copy());
+                                // console.log("time test");
+                                // setTimeout((tile, beginning, movement) => {
+                                //     let travelled = movement.mult((t + 1)/100);
+                                //     let currentLocation = beginning.add(travelled);
+                                //     tile.x = currentLocation.x;
+                                //     tile.y = currentLocation.y;
+                                // }, t * 10, tile, beginning.copy(), movement.copy());
+
+                                setTimeout((tile) => {
+                                    tile.x = destination.x;
+                                    tile.y = destination.y;
+                                }, 1000, tile);
                             }
                         }
                     });
