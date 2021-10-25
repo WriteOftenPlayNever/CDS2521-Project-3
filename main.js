@@ -20,8 +20,10 @@ window.setup = function() {
 }
 
 window.draw = function() {
-    background(0);
-    GAME_INSTANCE.drawToCanvas();
+    if ((frameCount % 10) == 2) {
+        background(255);
+        GAME_INSTANCE.drawToCanvas();
+    }
 }
 
 window.mousePressed = function(mouseEvent) {
