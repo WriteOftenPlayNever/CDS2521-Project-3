@@ -267,6 +267,7 @@ export function getMovesAt(board, x, y) {
                 let destinationPiece = gameBoard[destinationX][destinationY];
                 
                 if (destinationPiece === null) {
+                    console.log([[x, y], [destinationX, destinationY]]);
                     moves.push(evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true));
                 } else {
                     break;
