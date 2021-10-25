@@ -30,7 +30,7 @@ export class Game {
         this.boardCorner = boardCorner;
         this.tileSize = tileSize;
         this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
-        
+
         bU.initialise(this.board, pearlPlayer, onyxPlayer);
 
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
@@ -67,6 +67,9 @@ export class Game {
 
     mousePressed() {
         let boardPosition = this.positionToIndex(mouseX, mouseY);
+
+
+        console.log(JSON.stringify(boardPosition));
         
         this.tiles.forEach(tile => {
             if (tile.xIndex === boardPosition.x && tile.yIndex === boardPosition.y) {
