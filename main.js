@@ -1,5 +1,3 @@
-import randInt from "./resources.js";
-
 let img;
 
 function preload() {
