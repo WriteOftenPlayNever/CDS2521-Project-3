@@ -73,11 +73,13 @@ export class Game {
                                 //     tile.y = currentLocation.y;
                                 // }, t * 10, tile, beginning.copy(), movement.copy());
 
-                                setTimeout((tile) => {
-                                    tile.x = destination.x;
-                                    tile.y = destination.y;
-                                }, 1000, tile);
+                                
                             }
+                            
+                            setTimeout((tile) => {
+                                tile.x = destination.x;
+                                tile.y = destination.y;
+                            }, 1000, tile);
                         }
                     });
 
