@@ -84,9 +84,13 @@ export class Game {
                                 
                             }
 
+                            console.log(destination);
+
                             setTimeout((tile) => {
                                 tile.x = destination.x;
                                 tile.y = destination.y;
+
+                                console.log(tile.x + " " + tile.y);
                             }, 1000, tile);
                         }
                     });
