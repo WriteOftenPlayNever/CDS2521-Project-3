@@ -51,8 +51,14 @@ export class Game {
 
         bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize).forEach(tile => {
             loadImage(tile.img, tImg => {
-                tImg.resize(0, this.tileSize * 0.9);
-                image(tImg, tile.x + this.tileSize * 0.05, tile.y + this.tileSize * 0.05);
+                if (tImg.width > tImg.height) {
+                    tImg.resize(this.tileSize * 0.9, 0);
+                } else {
+                    tImg.resize(0, this.tileSize * 0.9);
+                }
+                let xOffset = (this.tileSize - tImg.width)/2;
+                let yOffset = (this.tileSize - tImg.height)/2;
+                image(tImg, tile.x + xOffset, tile.y + yOffset);
             });
         });
     }
