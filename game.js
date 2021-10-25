@@ -99,7 +99,7 @@ export class Game {
                                 console.log(tile.x + " " + tile.y);
 
                                 game.tiles = tiles;
-                            }, 1050, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
+                            }, 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                         }
                     });
 

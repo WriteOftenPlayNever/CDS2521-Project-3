@@ -7,7 +7,7 @@ export const setImageAlpha = (img, alpha) => {
     img.loadPixels();
     for (let index = 0; index < img.pixels.length; index++) {
         if ((index % 4) == 3) {
-            img.pixels[index] = alpha * 255;
+            img.pixels[index] *= alpha;
         }
     }
     img.updatePixels();
