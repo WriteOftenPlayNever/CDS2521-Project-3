@@ -4,17 +4,6 @@ import { players } from "./players.js";
 
 let GAME_INSTANCE;
 
-function makeTag(tagName, parentElement, id, _classList, text) {
-    const tag = document.createElement(tagName);
-
-    if (id) tag.id = id;
-    if (_classList) tag.classList = _classList;
-    if (text) tag.append(text);
-
-    parentElement.appendChild(tag);
-
-    return tag;
-}
 
 window.preload = function() {
     let tileSize = (windowHeight * 0.95)/8;
@@ -23,7 +12,10 @@ window.preload = function() {
     const playerSelector = document.getElementById("playerSelector");
 
     for (let playerName in players) {
-        makeTag(`option value="${playerName}"`, playerSelector, null, null, playerName);
+        let optionTag = document.createElement("option");
+        optionTag.value = playerName;
+        optionTag.text = playerName;
+        playerSelector.appendChild(optionTag);
     }
 
     GAME_INSTANCE = new game.Game(players["Anne Passant"], players["Ophelia Truthy"], corner, tileSize);
