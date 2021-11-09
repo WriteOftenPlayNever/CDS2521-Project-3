@@ -1,5 +1,5 @@
 import * as rs from "./resources.js";
-import * as eU from "./enchantment.js";
+import * as enU from "./enchantment.js";
 
 export const ACTIVATION = {
     START_GAME: 0,
@@ -42,7 +42,7 @@ export const ARCHAEOLOGY = newDeviation("Archaeology", "When friendly rooks capt
             let piece = gameBoard[x][y];
             if (piece != null) {
                 if (piece.affiliation == affiliation && piece.type == "rook") {
-                    piece.enchantments.push(rs.objCopy(eU.DIG_SITE));
+                    piece.enchantments.push(rs.objCopy(enU.DIG_SITE));
                 }
             }
         }

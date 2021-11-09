@@ -1,9 +1,9 @@
 import * as rs from "./resources.js";
-import * as eU from "./enchantment.js";
+import * as enU from "./enchantment.js";
 
 // PEARL PIECES
 export const PEARL_PAWN = newPiece("P", "A Pawn", "./img/pearl/pawn.png", 0, "pawn", buildMP(2, [0, 1]), buildMP(1, [1, 1], [-1, 1]), 
-    [rs.objCopy(eU.DOUBLE_MOVE)], [], ["military", "proletariat"]);
+    [rs.objCopy(enU.DOUBLE_MOVE)], [], ["military", "proletariat"]);
 export const PEARL_KNIGHT = newPiece("N", "A Knight", "./img/pearl/knight.png", 0, "knight", buildMP(1, [2, 1], [-1, 2], [2, -1], [-1, -2], [-2, 1], [1, 2], [-2, -1], [1, -2]), null, 
     [], [], ["military", "animal", "armoured"]);
 export const PEARL_BISHOP = newPiece("B", "A Bishop", "./img/pearl/bishop.png", 0, "bishop", buildMP(8, [1, 1], [-1, 1], [1, -1], [-1, -1]), null, [], [], ["magic", "religious"]);
@@ -25,7 +25,7 @@ export const PEARL_VALKYRIE = newPiece("V", "a valkyrie", "./img/pearl/valkyrie.
     
 // ONYX PIECES
 export const ONYX_PAWN = newPiece("p", "A Pawn", "./img/onyx/pawn.png", 1, "pawn", buildMP(2, [0, -1]), buildMP(1, [1, -1], [-1, -1]), 
-    [rs.objCopy(eU.DOUBLE_MOVE)], [], ["military", "proletariat"]);
+    [rs.objCopy(enU.DOUBLE_MOVE)], [], ["military", "proletariat"]);
 export const ONYX_KNIGHT = newPiece("n", "A Knight", "./img/onyx/knight.png", 1, "knight", buildMP(1, [2, 1], [-1, 2], [2, -1], [-1, -2], [-2, 1], [1, 2], [-2, -1], [1, -2]), null, 
     [], [], ["military", "animal", "armoured"]);
 export const ONYX_BISHOP = newPiece("b", "A Bishop", "./img/onyx/bishop.png", 1, "bishop", buildMP(8, [1, 1], [-1, 1], [1, -1], [-1, -1]), null, [], [], ["magic", "religious"]);
