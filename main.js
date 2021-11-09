@@ -18,7 +18,7 @@ window.preload = function() {
         playerSelector.appendChild(optionTag);
     }
 
-    GAME_INSTANCE = new game.Game(players["Anne Passant"], players["Ophelia Truthy"], corner, tileSize);
+    GAME_INSTANCE = new game.Game(players["Suspenders Heathcliff"], players["Jellybean Zugzwang"], corner, tileSize);
 }
 
 window.setup = function() {

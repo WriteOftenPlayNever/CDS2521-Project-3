@@ -17,8 +17,8 @@ export const DOUBLE_MOVE = newEnchanment("Double First Move", TRIGGERS.ON_MOVE,
     "(event, _) => { if (event.piece.moveCount === 1) { event.piece.movePattern.range = 2 } }");
 
 export const DIG_SITE = newEnchanment("Dig Site", TRIGGERS.ON_CAPTURE, 
-    "(event, board) => { if (Math.random() < 0.1) { console.log(JSON.stringify(event)); bU.doEvent(board, evU.newCreation(rs.objCopy(pU.ARTIFACT), board.gameBoard[event.from[0]][event.from[1]], event.from)) } }",
-    "(event, board) => {}");
+    "(event, board) => { if (Math.random() < 0.1) { console.log(JSON.stringify(event)); bU.doEvent(board, evU.newCreation(rs.objCopy(pU.ARTIFACT), board.gameBoard[event.from[0]][event.from[1]], event.from, false)) } }",
+    "(_, __) => {}");
 
 export const PROMOTES = newEnchanment("Promotes", TRIGGERS.ON_MOVE,
     `(event, board) => {
@@ -26,10 +26,10 @@ export const PROMOTES = newEnchanment("Promotes", TRIGGERS.ON_MOVE,
         if (event.to[1] === target) {
             let queen = event.piece.affiliation === 0 ? rs.objCopy(pU.PEARL_QUEEN) : rs.objCopy(pU.ONYX_QUEEN);
             let promotionEvent = evU.newCreation(queen, board.gameBoard[event.to[0]][event.to[1]], event.to, false);
-            doEvent(board, promotionEvent);
+            bU.doEvent(board, promotionEvent);
         }
     }`,
-    "(event, board) => { }");
+    "(_, __) => {}");
 
 export const HIEROPHANT = newEnchanment("Hierophant", TRIGGERS.ON_MOVE,
     "(event, _) => { if (event.piece.moveCount === 1) { event.piece.movePattern = pU.buildMP(1, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]) } }", 
@@ -42,9 +42,11 @@ export const WINDUP = newEnchanment("Windup", TRIGGERS.ON_MOVE,
 export const SPAWN = newEnchanment("Spawn", TRIGGERS.ON_CAPTURE, 
     `(event, board) => {
         if (event.piece.affiliation === 0) {
-            board.gameBoard[event.from[0]][event.from[1]] = rs.objCopy(pU.PEARL_PAWN);
+            let spawnEvent = evU.newCreation(rs.objCopy(pU.PEARL_PAWN), board.gameBoard[event.from[0]][event.from[1]], event.from, false);
+            bU.doEvent(board, spawnEvent);
         } else {
-            board.gameBoard[event.from[0]][event.from[1]] = rs.objCopy(pU.ONYX_PAWN);
+            let spawnEvent = evU.newCreation(rs.objCopy(pU.ONYX_PAWN), board.gameBoard[event.from[0]][event.from[1]], event.from, false);
+            bU.doEvent(board, spawnEvent);
         }
     }`,
     `(_, __) => {}`);
@@ -59,7 +61,7 @@ export const SPAWN_SPECIFIC = (piece) => newEnchanment("Spawn from " + piece.nam
                 }
             }
         }`,
-        `(_, __) => {}`)
+        `(_, __) => {}`);
 
 
 export function newEnchanment(name, trigger, effect, undo) {

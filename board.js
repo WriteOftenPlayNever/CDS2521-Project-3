@@ -421,8 +421,8 @@ export function newBoard(boardSize) {
     return setup;
 }
 
-export function initialise(board, pearlPlayer, onyxPlayer) {
-    let gameBoard = board.gameBoard;
+export function initialise(game, pearlPlayer, onyxPlayer) {
+    let gameBoard = game.board.gameBoard;
 
     // PEARL PAWNS
     for (let i = 0; i < gameBoard.length; i++) {
@@ -466,15 +466,17 @@ export function initialise(board, pearlPlayer, onyxPlayer) {
 
 
     // START OF GAME PLAYER DEVIATIONS
-    pearlPlayer.effects.forEach(effect => {
+    pearlPlayer.effects.forEach(effectName => {
+        let effect = dU[effectName];
         if (effect.activation === dU.ACTIVATION.START_GAME) {
-            effect.activate(0, setup);
+            eval(effect.effect)(game, 0);
         }
     });
 
-    onyxPlayer.effects.forEach(effect => {
+    onyxPlayer.effects.forEach(effectName => {
+        let effect = dU[effectName];
         if (effect.activation === dU.ACTIVATION.START_GAME) {
-            effect.activate(1, setup);
+            eval(effect.effect)(game, 1);
         }
     });
 }

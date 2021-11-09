@@ -173,7 +173,7 @@ export const players = {
 			"forgetfulness": 11,
 			"impulsivity": 30
 		},
-		"effects": [],
+		"effects": ["HACKING"],
 		"openings": {}
 	},
 	"Dylan Paul": {
@@ -537,7 +537,7 @@ export const players = {
 			"forgetfulness": 28,
 			"impulsivity": 47
 		},
-		"effects": [],
+		"effects": ["ARCHAEOLOGY"],
 		"openings": {}
 	},
 	"Zhengyi Cucumber": {

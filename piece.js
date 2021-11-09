@@ -12,6 +12,16 @@ export const PEARL_QUEEN = newPiece("Q", "A Queen", "./img/pearl/queen.png", 0, 
     [], [], ["noble"]);
 export const PEARL_KING = newPiece("K", "A King", "./img/pearl/king.png", 0, "king", buildMP(1, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]), null,
     [], [], ["noble"]);
+export const PEARL_FLOWER = newPiece("F", "a flower", "./img/pearl/flower.png", 0, "flower", buildMP(0, [0, 0]), buildMP(1, [1, 1], [-1, 1], [1, -1], [-1, -1]), 
+        [], [], ["natural", "plant"]);
+export const PEARL_INSCRUTABLE_ORB = newPiece("Ø", "Inscrutable Orb", "./img/pearl/orb.png", 0, "inscrutable", buildMP(1, [[-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,-2],[-1,2],[0,-2],[0,2],[1,-2],[1,2],[2,-2],[2,-1],[2,0],[2,1],[2,2]]), null, 
+        [], [], ["magic", "science", "object"]);
+export const PEARL_CRAB = newPiece("C", "a crab", "./img/pearl/crab.png", 0, "crab", buildMP(1, [0, 1], [-1, 0], [1, 0]), buildMP(2, [-1, 0], [1, 0]), 
+        [], [], ["animal", "armoured", "aquatic", "proletariat"]);
+export const PEARL_ELEPHANT = newPiece("E", "an elephant", "./img/pearl/elephant.png", 0, "elephant", buildMP(1, [-2, 2], [2, 2], [2, -2], [-2, -2]), null,
+        [], [], ["animal"]);
+export const PEARL_VALKYRIE = newPiece("V", "a valkyrie", "./img/pearl/valkyrie.png", 0, "valkyrie", buildMP(3, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]), null,
+        [], [], ["military", "armoured", "flying", "magic"]);
     
 // ONYX PIECES
 export const ONYX_PAWN = newPiece("p", "A Pawn", "./img/onyx/pawn.png", 1, "pawn", buildMP(2, [0, -1]), buildMP(1, [1, -1], [-1, -1]), 
@@ -24,6 +34,16 @@ export const ONYX_QUEEN = newPiece("q", "A Queen", "./img/onyx/queen.png", 1, "q
     [], [], ["noble"]);
 export const ONYX_KING = newPiece("k", "A King", "./img/onyx/king.png", 1, "king", buildMP(1, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]), null,
     [], [], ["noble"]);
+export const ONYX_FLOWER = newPiece("f", "a flower", "./img/onyx/flower.png", 1, "flower", buildMP(0, [0, 0]), buildMP(1, [1, 1], [-1, 1], [1, -1], [-1, -1]), 
+        [], [], ["natural", "plant"]);
+export const ONYX_INSCRUTABLE_ORB = newPiece("ø", "Inscrutable Orb", "./img/onyx/orb.png", 1, "inscrutable", buildMP(1, [[-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,-2],[-1,2],[0,-2],[0,2],[1,-2],[1,2],[2,-2],[2,-1],[2,0],[2,1],[2,2]]), null, 
+        [], [], ["magic", "science", "aquatic", "object"]);
+export const ONYX_CRAB = newPiece("c", "a crab", "./img/onyx/crab.png", 1, "crab", buildMP(1, [0, -1], [-1, 0], [1, 0]), buildMP(2, [-1, 0], [1, 0]), 
+        [], [], ["animal", "armoured", "aquatic", "proletariat"]);
+export const ONYX_ELEPHANT = newPiece("e", "an elephant", "./img/onyx/elephant.png", 1, "elephant", buildMP(1, [-2, 2], [2, 2], [2, -2], [-2, -2]), null,
+        [], [], ["animal"]);
+export const ONYX_VALKYRIE = newPiece("v", "a valkyrie", "./img/onyx/valkyrie.png", 1, "valkyrie", buildMP(3, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]), null,
+        [], [], ["military", "armoured", "flying", "magic"]);
 
 // NEUTRAL PIECES
 export const ARTIFACT = newPiece("A", "An Artifact", "./img/misc/artifact.png", 3, "artifact", buildMP(0, [0, 0]), null, [], [], ["object", "old"]);

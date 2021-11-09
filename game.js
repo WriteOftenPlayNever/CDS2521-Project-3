@@ -35,19 +35,9 @@ export class Game {
         bU.initialise(this.board, pearlPlayer, onyxPlayer);
 
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
-
-        // let gameBoard = this.board.gameBoard;
-        // for (let x = gameBoard.length - 1; x > -1; x--) {
-        //     for (let y = 0; y < gameBoard.length; y++) {
-        //         let piece = gameBoard[x][y];
-        //         if (piece !== null) {
-        //             piece.enchantments.push(eU.DIG_SITE);
-        //         }
-        //     }
-        // }
     }
 
-    handleGameEvent(event) {
+    handleGameEvent(event, isHumanMove) {
         let eventCount = this.board.eventList.length;
 
         bU.doEvent(this.board, event);
@@ -67,52 +57,50 @@ export class Game {
 
                     break;
                 case evU.EVENT_TYPES.MOVE:
-                    this.tiles.forEach(tile => {
-                        if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
-                            console.log("It found the right tile " + tile.xIndex + " " + tile.yIndex);
-
-                            let beginning = {
-                                x: tile.x,
-                                y: tile.y
+                    if (isHumanMove) {
+                        this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
+                    } else {
+                        this.tiles.forEach(tile => {
+                            if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
+                                let beginning = {
+                                    x: tile.x,
+                                    y: tile.y
+                                }
+                                let destination = {
+                                    x: this.boardCorner.x + event.to[0] * this.tileSize,
+                                    y: this.boardCorner.y + event.to[1] * this.tileSize
+                                }
+                                let movement = {
+                                    x: destination.x - beginning.x,
+                                    y: destination.y - beginning.y
+                                }
+                                for (let t = 0; t < 100; t++) {
+                                    // console.log("time test");
+                                    setTimeout((tile, beginning, movement) => {
+                                        let travelled = {
+                                            x: movement.x * (t + 1)/100,
+                                            y: movement.y * (t + 1)/100
+                                        }
+                                        let currentLocation = {
+                                            x: beginning.x + travelled.x,
+                                            y: beginning.y + travelled.y
+                                        }
+                                        tile.x = currentLocation.x;
+                                        tile.y = currentLocation.y;
+                                    }, t * 3, tile, rs.objCopy(beginning), rs.objCopy(movement));
+                                }
+    
+                                setTimeout((tile, game, tiles) => {
+                                    tile.x = destination.x;
+                                    tile.y = destination.y;
+    
+                                    console.log(tile.x + " " + tile.y);
+    
+                                    game.tiles = tiles;
+                                }, 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             }
-                            let destination = {
-                                x: this.boardCorner.x + event.to[0] * this.tileSize,
-                                y: this.boardCorner.y + event.to[1] * this.tileSize
-                            }
-                            let movement = {
-                                x: destination.x - beginning.x,
-                                y: destination.y - beginning.y
-                            }
-                            for (let t = 0; t < 100; t++) {
-                                // console.log("time test");
-                                setTimeout((tile, beginning, movement) => {
-                                    let travelled = {
-                                        x: movement.x * (t + 1)/100,
-                                        y: movement.y * (t + 1)/100
-                                    }
-                                    let currentLocation = {
-                                        x: beginning.x + travelled.x,
-                                        y: beginning.y + travelled.y
-                                    }
-                                    tile.x = currentLocation.x;
-                                    tile.y = currentLocation.y;
-                                }, t * 3, tile, rs.objCopy(beginning), rs.objCopy(movement));
-
-                                
-                            }
-
-                            console.log(destination);
-
-                            setTimeout((tile, game, tiles) => {
-                                tile.x = destination.x;
-                                tile.y = destination.y;
-
-                                console.log(tile.x + " " + tile.y);
-
-                                game.tiles = tiles;
-                            }, 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
-                        }
-                    });
+                        });
+                    }
 
                     if (event.captured !== null) {
                         this.tiles.forEach(tile => {
@@ -183,13 +171,13 @@ export class Game {
 
                 pieceMoves.forEach(move => {
                     if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
-                        this.handleGameEvent(move);
+                        this.handleGameEvent(move, true);
                     }
                 });
 
                 pieceAttacks.forEach(attack => {
                     if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
-                        this.handleGameEvent(attack);
+                        this.handleGameEvent(attack, true);
                     }
                 });
             }
