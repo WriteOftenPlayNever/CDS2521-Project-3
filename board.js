@@ -467,16 +467,16 @@ export function initialise(game, pearlPlayer, onyxPlayer) {
 
     // START OF GAME PLAYER DEVIATIONS
     pearlPlayer.effects.forEach(effectName => {
-        let effect = dU[effectName];
-        if (effect.activation === dU.ACTIVATION.START_GAME) {
-            eval(effect.effect)(game, 0);
+        let deviation = dU[effectName];
+        if (deviation.activation === dU.ACTIVATION.START_GAME) {
+            eval(deviation.effect)(game, 0);
         }
     });
 
     onyxPlayer.effects.forEach(effectName => {
-        let effect = dU[effectName];
-        if (effect.activation === dU.ACTIVATION.START_GAME) {
-            eval(effect.effect)(game, 1);
+        let deviation = dU[effectName];
+        if (deviation.activation === dU.ACTIVATION.START_GAME) {
+            eval(deviation.effect)(game, 1);
         }
     });
 }

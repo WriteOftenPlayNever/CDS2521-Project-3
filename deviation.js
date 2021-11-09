@@ -13,7 +13,7 @@ export const HACKING = newDeviation("Hacking", "At the start of the game, an ene
     let board = game.board, 
         gameBoard = game.board.gameBoard, 
         locations = [],
-        player = affiliation === 0 ? game.pearl.player : game.onyx.player;
+        player = affiliation === 0 ? game.pearlPlayer : game.onyxPlayer;
 
     for (let x = 0; x < gameBoard.length; x++) {
         for (let y = 0; y < gameBoard.length; y++) {
