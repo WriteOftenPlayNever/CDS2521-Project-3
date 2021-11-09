@@ -36,15 +36,15 @@ export class Game {
 
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
 
-        let gameBoard = this.board.gameBoard;
-        for (let x = gameBoard.length - 1; x > -1; x--) {
-            for (let y = 0; y < gameBoard.length; y++) {
-                let piece = gameBoard[x][y];
-                if (piece !== null) {
-                    piece.enchantments.push(eU.DIG_SITE);
-                }
-            }
-        }
+        // let gameBoard = this.board.gameBoard;
+        // for (let x = gameBoard.length - 1; x > -1; x--) {
+        //     for (let y = 0; y < gameBoard.length; y++) {
+        //         let piece = gameBoard[x][y];
+        //         if (piece !== null) {
+        //             piece.enchantments.push(eU.DIG_SITE);
+        //         }
+        //     }
+        // }
     }
 
     handleGameEvent(event) {
