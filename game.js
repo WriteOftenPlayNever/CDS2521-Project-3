@@ -32,7 +32,7 @@ export class Game {
         this.tileSize = tileSize;
         this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
 
-        bU.initialise(this.board, pearlPlayer, onyxPlayer);
+        bU.initialise(this, pearlPlayer, onyxPlayer);
 
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
     }
