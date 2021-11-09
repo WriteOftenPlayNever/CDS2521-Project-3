@@ -17,7 +17,7 @@ export const DOUBLE_MOVE = newEnchanment("Double First Move", TRIGGERS.ON_MOVE,
     "(event, _) => { if (event.piece.moveCount === 1) { event.piece.movePattern.range = 2 } }");
 
 export const DIG_SITE = newEnchanment("Dig Site", TRIGGERS.ON_CAPTURE, 
-    "(event, board) => { if (Math.random() < 0.1) { console.log(JSON.stringify(event)); bU.doEvent(board, evU.newCreation(rs.objCopy(pU.ARTIFACT), board.gameBoard[event.from[0]][event.from[1]], event.from, false)) } }",
+    "(event, board) => { console.log(JSON.stringify(event)); bU.doEvent(board, evU.newCreation(rs.objCopy(pU.ARTIFACT), board.gameBoard[event.from[0]][event.from[1]], event.from, false)) }",
     "(_, __) => {}");
 
 export const PROMOTES = newEnchanment("Promotes", TRIGGERS.ON_MOVE,

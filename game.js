@@ -57,23 +57,27 @@ export class Game {
 
                     break;
                 case evU.EVENT_TYPES.MOVE:
-                    if (isHumanMove) {
-                        this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
-                    } else {
-                        this.tiles.forEach(tile => {
-                            if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
-                                let beginning = {
-                                    x: tile.x,
-                                    y: tile.y
-                                }
-                                let destination = {
-                                    x: this.boardCorner.x + event.to[0] * this.tileSize,
-                                    y: this.boardCorner.y + event.to[1] * this.tileSize
-                                }
-                                let movement = {
-                                    x: destination.x - beginning.x,
-                                    y: destination.y - beginning.y
-                                }
+                    this.tiles.forEach(tile => {
+                        if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
+                            let beginning = {
+                                x: tile.x,
+                                y: tile.y
+                            }
+                            let destination = {
+                                x: this.boardCorner.x + event.to[0] * this.tileSize,
+                                y: this.boardCorner.y + event.to[1] * this.tileSize
+                            }
+                            let movement = {
+                                x: destination.x - beginning.x,
+                                y: destination.y - beginning.y
+                            }
+
+                            if (isHumanMove) {
+                                tile.x = movement.x;
+                                tile.y = movement.y;
+
+                                setTimeout((_game, _tiles) => { _game.tiles = _tiles; }, 100, this, tiles);
+                            } else {
                                 for (let t = 0; t < 100; t++) {
                                     // console.log("time test");
                                     setTimeout((tile, beginning, movement) => {
@@ -89,7 +93,7 @@ export class Game {
                                         tile.y = currentLocation.y;
                                     }, t * 3, tile, rs.objCopy(beginning), rs.objCopy(movement));
                                 }
-    
+
                                 setTimeout((tile, game, tiles) => {
                                     tile.x = destination.x;
                                     tile.y = destination.y;
@@ -99,8 +103,11 @@ export class Game {
                                     game.tiles = tiles;
                                 }, 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             }
-                        });
-                    }
+
+
+                        }
+                    });
+                    
 
                     if (event.captured !== null) {
                         this.tiles.forEach(tile => {
