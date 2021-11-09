@@ -73,8 +73,8 @@ export class Game {
                             }
 
                             if (isHumanMove) {
-                                tile.x = movement.x;
-                                tile.y = movement.y;
+                                tile.x = destination.x;
+                                tile.y = destination.y;
 
                                 setTimeout((game, tiles) => { game.tiles = tiles; }, 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             } else {
