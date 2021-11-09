@@ -323,10 +323,10 @@ export function getAttacksAt(board, x, y) {
 export function getDefendsAt(board, x, y) {
     let gameBoard = board.gameBoard;
     let piece = gameBoard[x][y];
-    let moves = [];
+    let defends = [];
 
     if (piece === null) {
-        return moves;
+        return defends;
     }
 
     let mp = piece.movePattern;
@@ -346,13 +346,15 @@ export function getDefendsAt(board, x, y) {
                 
                 if (destinationPiece !== null) {
                     if (destinationPiece.affiliation === affiliation) {
-                        moves.push(evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true));
+                        defends.push(evU.newMove(piece, destinationPiece, [x, y], [destinationX, destinationY], true));
                     }
                     break;
                 }
             }
         }
     })
+
+
 }
 
 export function getMADat(board, x, y) {
