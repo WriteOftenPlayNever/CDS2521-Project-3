@@ -76,7 +76,7 @@ export class Game {
                                 tile.x = movement.x;
                                 tile.y = movement.y;
 
-                                setTimeout((_game, _tiles) => { _game.tiles = _tiles; }, 100, this, tiles);
+                                setTimeout((game, tiles) => { game.tiles = tiles; }, 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             } else {
                                 for (let t = 0; t < 100; t++) {
                                     // console.log("time test");
