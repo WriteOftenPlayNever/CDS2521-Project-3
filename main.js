@@ -22,7 +22,7 @@ window.preload = function() {
 }
 
 window.setup = function() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth * 0.99, windowHeight * 0.99);
     background(255);
     
     console.log(bU.getMovesAt(GAME_INSTANCE.board, 0, 1));
