@@ -47,18 +47,19 @@ export class Game {
             let offset = (i - eventCount) * 100;
             switch (event.type) {
                 case evU.EVENT_TYPES.CREATE:
-                    setTimeout((game, tiles, offset) => {
+                    setTimeout((game, tiles) => {
                         game.tiles = tiles;
 
                         tiles.forEach(tile => {
                             if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
                                 for (let t = 0; t < 100; t++) {
                                     setTimeout(rs.setImageAlpha, t * 3, tile.img, (t + 1)/100);
+                                    setTimeout((tile) => console.log(JSON.stringify(tile)), t * 50, tile);
                                 }
                             }
                         });
 
-                    }, offset + 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize), offset);
+                    }, offset + 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
 
                     break;
                 case evU.EVENT_TYPES.MOVE:
