@@ -49,9 +49,11 @@ export class Game {
                     this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
 
                     console.log("IT GETS TO THE RIGHT PLACE");
+                    console.log(JSON.stringify(event));
 
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
+                            console.log(JSON.stringify(event.to[0]));
                             for (let t = 0; t < 100; t++) {
                                 setTimeout(rs.setImageAlpha, t * 3, tile.img, (t + 1)/100);
                             }
