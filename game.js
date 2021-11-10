@@ -37,15 +37,18 @@ export class Game {
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
     }
 
-    handleGameEvent(event, isHumanMove) {
+    handleGameEvent(chosenEvent, isHumanMove) {
         let eventCount = this.board.eventList.length;
 
-        bU.doEvent(this.board, event);
+        bU.doEvent(this.board, chosenEvent);
 
         for(let i = eventCount; i < this.board.eventList.length; i++) {
+            let event = this.board.eventList[i];
             switch (event.type) {
                 case evU.EVENT_TYPES.CREATE:
                     this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
+
+                    console.log("IT GETS TO THE RIGHT PLACE");
 
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {

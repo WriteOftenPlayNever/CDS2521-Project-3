@@ -1,4 +1,5 @@
 import * as rs from "./resources.js";
+import * as pU from "./piece.js";
 import * as enU from "./enchantment.js";
 
 export const ACTIVATION = {
@@ -43,6 +44,38 @@ export const ARCHAEOLOGY = newDeviation("Archaeology", "When friendly rooks capt
             if (piece != null) {
                 if (piece.affiliation == affiliation && piece.type == "rook") {
                     piece.enchantments.push(rs.objCopy(enU.DIG_SITE));
+                }
+            }
+        }
+    }
+}`);
+
+export const HEAVY_CAVALRY = newDeviation("Heavy Cavalry", "No knights, elephants instead.", ACTIVATION.START_GAME, 
+`(game, affiliation) => {
+    let gameBoard = game.board.gameBoard;
+
+    for (let x = 0; x < gameBoard.length; x++) {
+        for (let y = 0; y < gameBoard.length; y++) {
+            let piece = gameBoard[x][y];
+            if (piece != null) {
+                if (piece.affiliation == affiliation && piece.type == "knight") {
+                    gameBoard[x][y] = affiliation == 0 ? rs.objCopy(pU.PEARL_ELEPHANT) : rs.objCopy(pU.ONYX_ELEPHANT);
+                }
+            }
+        }
+    }
+}`);
+
+export const MILITANT_THEOCRACY = newDeviation("Militant Theocracy", "No knights, no rooks, only bishops.", ACTIVATION.START_GAME,
+`(game, affiliation) => {
+    let gameBoard = game.board.gameBoard;
+
+    for (let x = 0; x < gameBoard.length; x++) {
+        for (let y = 0; y < gameBoard.length; y++) {
+            let piece = gameBoard[x][y];
+            if (piece != null) {
+                if (piece.affiliation == affiliation && (piece.type == "knight" || piece.type == "rook")) {
+                    gameBoard[x][y] = affiliation == 0 ? rs.objCopy(pU.PEARL_BISHOP) : rs.objCopy(pU.ONYX_BISHOP);
                 }
             }
         }

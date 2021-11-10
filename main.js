@@ -25,12 +25,6 @@ window.setup = function() {
     createCanvas(windowWidth * 0.99, windowHeight * 0.99);
     background(255);
     
-    console.log(bU.getMovesAt(GAME_INSTANCE.board, 0, 1));
-    console.log(bU.getMovesAt(GAME_INSTANCE.board, 1, 0));
-
-    console.log(GAME_INSTANCE.board);
-
-    console.log(bU.getMoves(GAME_INSTANCE.board, 0));
 
     GAME_INSTANCE.drawToCanvas();
 }
