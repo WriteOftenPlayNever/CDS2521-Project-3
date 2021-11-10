@@ -44,6 +44,7 @@ export class Game {
 
         for(let i = eventCount; i < this.board.eventList.length; i++) {
             let event = this.board.eventList[i];
+            let offset = (i - eventCount) * 100;
             switch (event.type) {
                 case evU.EVENT_TYPES.CREATE:
                     this.tiles = bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize);
@@ -53,9 +54,9 @@ export class Game {
 
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
-                            console.log(JSON.stringify(event.to[0]));
+                            console.log(JSON.stringify(tile));
                             for (let t = 0; t < 100; t++) {
-                                setTimeout(rs.setImageAlpha, t * 3, tile.img, (t + 1)/100);
+                                setTimeout(rs.setImageAlpha, offset + (t * 3), tile.img, (t + 1)/100);
                             }
                         }
                     });
@@ -81,7 +82,7 @@ export class Game {
                                 tile.x = destination.x;
                                 tile.y = destination.y;
 
-                                setTimeout((game, tiles) => { game.tiles = tiles; }, 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
+                                setTimeout((game, tiles) => { game.tiles = tiles; }, offset + 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             } else {
                                 for (let t = 0; t < 100; t++) {
                                     // console.log("time test");
@@ -96,7 +97,7 @@ export class Game {
                                         }
                                         tile.x = currentLocation.x;
                                         tile.y = currentLocation.y;
-                                    }, t * 3, tile, rs.objCopy(beginning), rs.objCopy(movement));
+                                    }, offset + (t * 3), tile, rs.objCopy(beginning), rs.objCopy(movement));
                                 }
 
                                 setTimeout((tile, game, tiles) => {
@@ -106,7 +107,7 @@ export class Game {
                                     console.log(tile.x + " " + tile.y);
     
                                     game.tiles = tiles;
-                                }, 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
+                                }, offset + 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             }
 
 
@@ -118,7 +119,7 @@ export class Game {
                         this.tiles.forEach(tile => {
                             if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
                                 for (let t = 0; t < 100; t++) {
-                                    setTimeout(rs.setImageAlpha, t * 3, tile.img, (100 - t + 1)/100);
+                                    setTimeout(rs.setImageAlpha, offset + (t * 3), tile.img, (100 - t + 1)/100);
                                 }
                             }
                         });
