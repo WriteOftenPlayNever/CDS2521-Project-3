@@ -46,17 +46,6 @@ export class Game {
             let event = this.board.eventList[i];
             let offset = (i - eventCount) * 100;
             switch (event.type) {
-                case evU.EVENT_TYPES.CREATE:
-                    
-                    this.tiles.forEach(tile => {
-                        if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
-                            for (let t = 50; t < 100; t++) {
-                                setTimeout(rs.setImageAlpha, 300 + (t * 9), tile.img, (t + 1)/100);
-                            }
-                        }
-                    });
-
-                    break;
                 case evU.EVENT_TYPES.MOVE:
                     this.tiles.forEach(tile => {
                         if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
