@@ -19,10 +19,10 @@ window.preload = function() {
         optionTag.text = playerName;
         playerSelector.appendChild(optionTag);
 
-        let optionTag = document.createElement("option");
-        optionTag.value = playerName;
-        optionTag.text = playerName;
-        enemySelector.appendChild(optionTag);
+        let enemyOptionTag = document.createElement("option");
+        enemyOptionTag.value = playerName;
+        enemyOptionTag.text = playerName;
+        enemySelector.appendChild(enemyOptionTag);
     }
 
     GAME_INSTANCE = new game.Game(players["Suspenders Heathcliff"], players["Jellybean Zugzwang"], corner, tileSize);
