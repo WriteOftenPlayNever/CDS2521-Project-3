@@ -537,7 +537,7 @@ export const players = {
 			"forgetfulness": 28,
 			"impulsivity": 47
 		},
-		"effects": ["PACK_MULES"],
+		"effects": ["MILITANT_THEOCRACY"],
 		"openings": {}
 	},
 	"Zhengyi Cucumber": {

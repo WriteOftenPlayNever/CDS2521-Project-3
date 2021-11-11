@@ -60,19 +60,19 @@ export const CARRY = newEnchanment("Carry", TRIGGERS.ON_MOVE,
             targetPiece = gameBoard[targetPos[0]][targetPos[1]];
             destinationPos = [event.to[0] + 1, event.to[1]];
             if (gameBoard[destinationPos[0]][destinationPos[1]] == null) {
-                carryMoveEvent = evU.newMove(targetPiece, null, targetPos, destinationPos);
+                carryMoveEvent = evU.newMove(targetPiece, null, targetPos, destinationPos, false);
             }
         } else {
             targetPos = [event.from[0] - 1, event.from[1]];
             targetPiece = gameBoard[targetPos[0]][targetPos[1]];
             destinationPos = [event.to[0] - 1, event.to[1]];
             if (gameBoard[destinationPos[0]][destinationPos[1]] == null) {
-                carryMoveEvent = evU.newMove(targetPiece, null, targetPos, destinationPos);
+                carryMoveEvent = evU.newMove(targetPiece, null, targetPos, destinationPos, false);
             }
         }
 
         if (carryMoveEvent != null) {
-            bU.doEvent(carryMoveEvent);
+            bU.doEvent(board, carryMoveEvent);
         }
     }`,
     `(_, __) => {}`);
