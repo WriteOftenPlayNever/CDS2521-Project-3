@@ -82,6 +82,22 @@ export const MILITANT_THEOCRACY = newDeviation("Militant Theocracy", "No knights
     }
 }`);
 
+export const PACK_MULES = newDeviation("Pack Mules", "Knight carry the pieces above them when they move.", ACTIVATION.START_GAME, 
+`(game, affiliation) => {
+    let gameBoard = game.board.gameBoard;
+
+    for (let x = 0; x < gameBoard.length; x++) {
+        for (let y = 0; y < gameBoard.length; y++) {
+            let piece = gameBoard[x][y];
+            if (piece != null) {
+                if (piece.affiliation == affiliation && piece.type == "knight") {
+                    piece.enchantments.push(rs.objCopy(enU.CARRY));
+                }
+            }
+        }
+    }
+}`)
+
 
 export function newDeviation(name, description, activation, effect) {
     return {
