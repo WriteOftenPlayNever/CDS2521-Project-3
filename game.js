@@ -1,6 +1,7 @@
 import * as rs from "./resources.js";
 import * as bU from "./board.js";
 import * as evU from "./event.js";
+import * as dU from "./deviation.js";
 import * as enU from "./enchantment.js";
 import * as pU from "./piece.js";
 import { players } from "./players.js";
