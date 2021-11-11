@@ -565,7 +565,7 @@ export const players = {
 			"knight": {
 				"target": [
 					6,
-					0
+					4
 				],
 				"weights": [
 					261,
@@ -714,7 +714,7 @@ export const players = {
 			"forgetfulness": 25,
 			"impulsivity": 40
 		},
-		"effects": [],
+		"effects": ["VALKYRIES"],
 		"openings": {}
 	},
 	"Anne Passant": {
@@ -891,7 +891,7 @@ export const players = {
 			"forgetfulness": 27,
 			"impulsivity": 53
 		},
-		"effects": [],
+		"effects": ["CRAB_ARMY"],
 		"openings": {}
 	},
 	"Morphy Rectified": {
@@ -1063,7 +1063,7 @@ export const players = {
 			"forgetfulness": 20,
 			"impulsivity": 55
 		},
-		"effects": [],
+		"effects": ["MISSILE_DEFENSE"],
 		"openings": {}
 	},
 	"Caspian Haynes": {
@@ -1235,7 +1235,7 @@ export const players = {
 			"forgetfulness": 19,
 			"impulsivity": 48
 		},
-		"effects": [],
+		"effects": ["INSCRUTABLE_ORB"],
 		"openings": {}
 	},
 	"Json Smythe": {
@@ -1417,7 +1417,7 @@ export const players = {
 			"forgetfulness": 8,
 			"impulsivity": 76
 		},
-		"effects": [],
+		"effects": ["ARCHAEOLOGY"],
 		"openings": {}
 	},
 	"Lexie Forfeit": {
@@ -1599,7 +1599,7 @@ export const players = {
 			"forgetfulness": 25,
 			"impulsivity": 21
 		},
-		"effects": [],
+		"effects": ["HEAVY_CAVALRY"],
 		"openings": {}
 	},
 	"Achieve Henrietta": {
@@ -1771,7 +1771,7 @@ export const players = {
 			"forgetfulness": 19,
 			"impulsivity": 92
 		},
-		"effects": [],
+		"effects": ["SCRAMBLED"],
 		"openings": {}
 	},
 	"Ophelia Truthy": {
@@ -1948,7 +1948,7 @@ export const players = {
 			"forgetfulness": 15,
 			"impulsivity": 31
 		},
-		"effects": [],
+		"effects": ["TROJAN_HORSE"],
 		"openings": {}
 	},
 	"Englund Ape": {
@@ -2120,7 +2120,7 @@ export const players = {
 			"forgetfulness": 25,
 			"impulsivity": 57
 		},
-		"effects": [],
+		"effects": ["ANNIHILATION"],
 		"openings": {}
 	},
 	"Yaboi Gherkin": {
@@ -2277,7 +2277,7 @@ export const players = {
 			"forgetfulness": 19,
 			"impulsivity": 24
 		},
-		"effects": [],
+		"effects": ["GOD_KING"],
 		"openings": {}
 	},
 	"Faraday Tempo": {
@@ -2444,341 +2444,7 @@ export const players = {
 			"forgetfulness": 8,
 			"impulsivity": 60
 		},
-		"effects": [],
-		"openings": {}
-	},
-	"Nelly Yoink": {
-		"firstName": "Nelly",
-		"lastName": "Yoink",
-		"elo": 1500,
-		"preferences": {
-			"pawn": {
-				"target": [
-					6,
-					3
-				],
-				"weights": [
-					157,
-					0,
-					-79,
-					24,
-					-45,
-					-5,
-					61,
-					-5,
-					8
-				]
-			},
-			"knight": {
-				"target": [
-					4,
-					4
-				],
-				"weights": [
-					438,
-					-2,
-					-7,
-					6,
-					32,
-					2,
-					-2,
-					14,
-					18
-				]
-			},
-			"bishop": {
-				"target": [
-					3,
-					1
-				],
-				"weights": [
-					285,
-					10,
-					-77,
-					-77,
-					41,
-					22,
-					-35,
-					23,
-					-1
-				]
-			},
-			"rook": {
-				"target": [
-					3,
-					5
-				],
-				"weights": [
-					757,
-					7,
-					82,
-					-24,
-					-84,
-					21,
-					1,
-					29,
-					-23
-				]
-			},
-			"queen": {
-				"target": [
-					5,
-					3
-				],
-				"weights": [
-					852,
-					-40,
-					13,
-					30,
-					26,
-					7,
-					-40,
-					-14,
-					-3
-				]
-			},
-			"king": {
-				"target": [
-					2,
-					4
-				],
-				"weights": [
-					10000,
-					-5,
-					-13,
-					-32,
-					-29,
-					-3,
-					71,
-					16,
-					12
-				]
-			},
-			"other": {
-				"target": [
-					3,
-					3
-				],
-				"weights": [
-					249,
-					2,
-					-69,
-					45,
-					31,
-					-1,
-					14,
-					-32,
-					9
-				]
-			}
-		},
-		"shallowPreferences": {
-			"verticalSym": 11,
-			"horizontalSym": 18,
-			"rotationalSym": 47,
-			"lowMove": 43,
-			"highMove": 66,
-			"favouredTiles": [
-				[
-					1,
-					2
-				],
-				[
-					4,
-					1
-				],
-				[
-					4,
-					3
-				],
-				[
-					3,
-					6
-				],
-				[
-					4,
-					5
-				]
-			],
-			"favouredTilePrefs": [
-				-17,
-				9,
-				11,
-				-86,
-				13
-			],
-			"popularTilePref": 79
-		},
-		"talents": {
-			"calculation": 31,
-			"consistency": 44,
-			"volatility": 99,
-			"forgetfulness": 15,
-			"impulsivity": 56
-		},
-		"effects": [],
-		"openings": {}
-	},
-	"Bosephus Diggs": {
-		"firstName": "Bosephus",
-		"lastName": "Diggs",
-		"elo": 1500,
-		"preferences": {
-			"pawn": {
-				"target": [
-					5,
-					1
-				],
-				"weights": [
-					125,
-					10,
-					9,
-					11,
-					-2,
-					-22,
-					-39,
-					-35,
-					-10
-				]
-			},
-			"knight": {
-				"target": [
-					4,
-					3
-				],
-				"weights": [
-					438,
-					9,
-					43,
-					-58,
-					24,
-					5,
-					85,
-					-31,
-					10
-				]
-			},
-			"bishop": {
-				"target": [
-					2,
-					6
-				],
-				"weights": [
-					304,
-					-7,
-					54,
-					4,
-					-28,
-					-14,
-					-15,
-					-19,
-					2
-				]
-			},
-			"rook": {
-				"target": [
-					3,
-					6
-				],
-				"weights": [
-					417,
-					-43,
-					97,
-					16,
-					-22,
-					23,
-					-60,
-					7,
-					8
-				]
-			},
-			"queen": {
-				"target": [
-					1,
-					4
-				],
-				"weights": [
-					1161,
-					0,
-					67,
-					4,
-					-7,
-					14,
-					-1,
-					-37,
-					7
-				]
-			},
-			"king": {
-				"target": [
-					5,
-					4
-				],
-				"weights": [
-					10000,
-					12,
-					-34,
-					-16,
-					57,
-					-28,
-					-45,
-					-34,
-					12
-				]
-			},
-			"other": {
-				"target": [
-					3,
-					3
-				],
-				"weights": [
-					438,
-					15,
-					16,
-					-45,
-					-26,
-					6,
-					-32,
-					-12,
-					9
-				]
-			}
-		},
-		"shallowPreferences": {
-			"verticalSym": 7,
-			"horizontalSym": 0,
-			"rotationalSym": -8,
-			"lowMove": -27,
-			"highMove": 24,
-			"favouredTiles": [
-				[
-					4,
-					4
-				],
-				[
-					4,
-					6
-				],
-				[
-					0,
-					3
-				]
-			],
-			"favouredTilePrefs": [
-				-34,
-				-20,
-				-50
-			],
-			"popularTilePref": -56
-		},
-		"talents": {
-			"calculation": 77,
-			"consistency": 31,
-			"volatility": 78,
-			"forgetfulness": 20,
-			"impulsivity": 29
-		},
-		"effects": [],
+		"effects": ["E6"],
 		"openings": {}
 	},
 	"Oliveira Neutrino": {
@@ -2940,7 +2606,7 @@ export const players = {
 			"forgetfulness": 16,
 			"impulsivity": 14
 		},
-		"effects": [],
+		"effects": ["MILITOCRACY"],
 		"openings": {}
 	},
 	"Harry Bitboard": {
@@ -3107,7 +2773,7 @@ export const players = {
 			"forgetfulness": 15,
 			"impulsivity": 57
 		},
-		"effects": [],
+		"effects": ["DISLOCATIVE"],
 		"openings": {}
 	},
 	"Jack Schnell": {
@@ -3284,7 +2950,7 @@ export const players = {
 			"forgetfulness": 25,
 			"impulsivity": 48
 		},
-		"effects": [],
+		"effects": ["CAVALRY_TACTICS"],
 		"openings": {}
 	},
 	"Pawnstorm Cyprus": {
@@ -3461,7 +3127,7 @@ export const players = {
 			"forgetfulness": 6,
 			"impulsivity": 67
 		},
-		"effects": [],
+		"effects": ["REVOLUTIONARIES"],
 		"openings": {}
 	}
 }

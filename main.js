@@ -2,6 +2,7 @@ import * as game from "./game.js";
 import * as bU from "./board.js";
 import { players } from "./players.js";
 
+// The game instance is a global variable
 let GAME_INSTANCE;
 
 

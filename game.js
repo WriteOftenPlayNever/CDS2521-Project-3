@@ -5,23 +5,7 @@ import * as enU from "./enchantment.js";
 import * as pU from "./piece.js";
 import { players } from "./players.js";
 import { Evaluator } from "./evaluator.js";
-
-
-
-// export function newGame(pearlPlayer, onyxPlayer) {
-//     let game = {
-//         id: rs.guid(),
-//         board: bU.newBoard(8, pearlPlayer, onyxPlayer),
-//         pearl: pearlPlayer,
-//         onyx: onyxPlayer
-//     }
-
-//     circle(200, 100, 0);
-
-//     bU.initialise(game.board, pearlPlayer, onyxPlayer);
-
-//     return game;
-// }
+// Import statements ^
 
 
 export class Game {
@@ -34,7 +18,7 @@ export class Game {
 
         bU.initialise(this, pearlPlayer, onyxPlayer);
 
-        
+
         // START OF GAME PLAYER DEVIATIONS
         pearlPlayer.effects.forEach(effectName => {
             let deviation = dU[effectName];
@@ -51,6 +35,13 @@ export class Game {
         });
 
 
+        // White has to play the first move, so fire up an evaluator
+        let evaluator = new Evaluator(this.board, pearlPlayer, null);
+        
+        // Handle the game event for the move chosen by the evaluator
+        this.handleGameEvent(evaluator.chooseMove(3), false);
+
+        // Show the tiles to the player
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
     }
 
@@ -131,6 +122,17 @@ export class Game {
                     break;
             }
         }
+
+        // If it's a human move, we need to calculate and play the CPU move
+        if (isHumanMove) {
+            // Instantiate a new evaluator instance
+            let evaluator = new Evaluator(this.board, this.pearlPlayer, null);
+
+            // Call this funciton again to handle a new game event
+            // and feed in the evaluator's chosen move
+            // but set it to be a machine move and not a human move
+            this.handleGameEvent(evaluator.chooseMove(3), false);
+        }
     }
 
     drawToCanvas() {
@@ -180,23 +182,35 @@ export class Game {
             if (tile.grabbed) {
                 tile.grabbed = false;
 
-                let pieceMoves = bU.getMovesAt(this.board, tile.xIndex, tile.yIndex);
-                let pieceAttacks = bU.getAttacksAt(this.board, tile.xIndex, tile.yIndex);
+                // Get the piece from the tile you were grabbing
+                let piece = this.board.gameBoard[tile.xIndex][tile.yIndex];
 
-                pieceMoves.forEach(move => {
-                    if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
-                        this.handleGameEvent(move, true);
-                    }
-                });
-
-                pieceAttacks.forEach(attack => {
-                    if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
-                        this.handleGameEvent(attack, true);
-                    }
-                });
+                // Only proceeed if it were a dark piece
+                if (piece.affiliation === 1) {
+                    // Get the moves and attacks of the piece
+                    let pieceMoves = bU.getMovesAt(this.board, tile.xIndex, tile.yIndex);
+                    let pieceAttacks = bU.getAttacksAt(this.board, tile.xIndex, tile.yIndex);
+    
+                    // Check if any of the moves were valid
+                    pieceMoves.forEach(move => {
+                        // If there's a valid move
+                        if (move.to[0] === boardPosition.x && move.to[1] === boardPosition.y) {
+                            // Play that move
+                            this.handleGameEvent(move, true);
+                        }
+                    });
+    
+                    // Check if any of the attacks were valid
+                    pieceAttacks.forEach(attack => {
+                        // If there's a valid attack
+                        if (attack.to[0] === boardPosition.x && attack.to[1] === boardPosition.y) {
+                            // Play that attack
+                            this.handleGameEvent(attack, true);
+                        }
+                    });
+                }
             }
         });
-
     }
 
     positionToIndex(x, y) {

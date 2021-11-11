@@ -51,6 +51,22 @@ export const SPAWN = newEnchanment("Spawn", TRIGGERS.ON_CAPTURE,
     }`,
     `(_, __) => {}`);
 
+export const GARDENER = newEnchanment("Gardener", TRIGGERS.ON_CAPTURE, 
+    `(event, board) => {
+        if (event.piece.affiliation === 0) {
+            let spawnEvent = evU.newCreation(rs.objCopy(pU.PEARL_FLOWER), board.gameBoard[event.from[0]][event.from[1]], event.from, false);
+            bU.doEvent(board, spawnEvent);
+        } else {
+            let spawnEvent = evU.newCreation(rs.objCopy(pU.ONYX_FLOWER), board.gameBoard[event.from[0]][event.from[1]], event.from, false);
+            bU.doEvent(board, spawnEvent);
+        }
+    }`,
+    `(_, __) => {}`);
+
+export const SKIRMISH = newEnchanment("Skirmish", TRIGGERS.ON_CAPTURE,
+    `(event, board) => bU.doEvent(board, evU.newMove(event.piece, null, event.to, event.from, false))`,
+    `(_, __) => {}`)
+
 export const SPAWN_SPECIFIC = (piece) => newEnchanment("Spawn from " + piece.name, TRIGGERS.ON_CAPTURE,
         `(event, board) => {
             if (event.caputured.type === '${piece.type}') {
