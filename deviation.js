@@ -82,7 +82,7 @@ export const MILITANT_THEOCRACY = newDeviation("Militant Theocracy", "No knights
     }
 }`);
 
-export const PACK_MULES = newDeviation("Pack Mules", "Knight carry the pieces above them when they move.", ACTIVATION.START_GAME, 
+export const GARDENING = newDeviation("Gardening", "When the queen or bishop capture a piece, they plant a flower.", ACTIVATION.START_GAME, 
 `(game, affiliation) => {
     let gameBoard = game.board.gameBoard;
 
@@ -90,8 +90,8 @@ export const PACK_MULES = newDeviation("Pack Mules", "Knight carry the pieces ab
         for (let y = 0; y < gameBoard.length; y++) {
             let piece = gameBoard[x][y];
             if (piece != null) {
-                if (piece.affiliation == affiliation && piece.type == "knight") {
-                    piece.enchantments.push(rs.objCopy(enU.CARRY));
+                if (piece.affiliation == affiliation && (piece.type == "queen" || piece.type == "bishop")) {
+                    piece.enchantments.push(rs.objCopy(enU.DIG_SITE));
                 }
             }
         }

@@ -464,21 +464,6 @@ export function initialise(game, pearlPlayer, onyxPlayer) {
     gameBoard[kingX + 1][gameBoard.length - 1] = rs.objCopy(piU.ONYX_BISHOP);
 
 
-
-    // START OF GAME PLAYER DEVIATIONS
-    pearlPlayer.effects.forEach(effectName => {
-        let deviation = dU[effectName];
-        if (deviation.activation === dU.ACTIVATION.START_GAME) {
-            eval(deviation.effect)(game, 0);
-        }
-    });
-
-    onyxPlayer.effects.forEach(effectName => {
-        let deviation = dU[effectName];
-        if (deviation.activation === dU.ACTIVATION.START_GAME) {
-            eval(deviation.effect)(game, 1);
-        }
-    });
 }
 
 export function toDisplayString(board) {

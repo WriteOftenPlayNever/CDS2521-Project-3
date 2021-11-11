@@ -10,12 +10,18 @@ window.preload = function() {
     let corner = createVector((windowWidth - (tileSize * 8))/2, windowHeight * 0.025);
 
     const playerSelector = document.getElementById("playerSelector");
+    const enemySelector = document.getElementById("enemySelector");
 
     for (let playerName in players) {
         let optionTag = document.createElement("option");
         optionTag.value = playerName;
         optionTag.text = playerName;
         playerSelector.appendChild(optionTag);
+
+        let optionTag = document.createElement("option");
+        optionTag.value = playerName;
+        optionTag.text = playerName;
+        enemySelector.appendChild(optionTag);
     }
 
     GAME_INSTANCE = new game.Game(players["Suspenders Heathcliff"], players["Jellybean Zugzwang"], corner, tileSize);
@@ -41,3 +47,14 @@ window.mousePressed = function(mouseEvent) {
 window.mouseReleased = function(mouseEvent) {
     GAME_INSTANCE.mouseReleased();
 }
+
+function newGame() {
+    const playerSelector = document.getElementById("playerSelector");
+    const enemySelector = document.getElementById("enemySelector");
+
+    GAME_INSTANCE = new game.Game(
+        players[enemySelector.options[enemySelector.selectedIndex].value], 
+        players[playerSelector.options[playerSelector.selectedIndex].value], 
+        corner, tileSize);
+}
+

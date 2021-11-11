@@ -360,7 +360,7 @@ export const players = {
 			"forgetfulness": 10,
 			"impulsivity": 40
 		},
-		"effects": [],
+		"effects": ["GARDENING"],
 		"openings": {}
 	},
 	"Jellybean Zugzwang": {

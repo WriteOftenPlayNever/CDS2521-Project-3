@@ -50,32 +50,6 @@ export const SPAWN = newEnchanment("Spawn", TRIGGERS.ON_CAPTURE,
         }
     }`,
     `(_, __) => {}`);
-    
-export const CARRY = newEnchanment("Carry", TRIGGERS.ON_MOVE,
-`    (event, board) => {
-        let gameBoard = board.gameBoard;
-        let carryMoveEvent = null, targetPos, targetPiece, destinationPos;
-        if (event.piece.affiliation === 0) {
-            targetPos = [event.from[0] + 1, event.from[1]];
-            targetPiece = gameBoard[targetPos[0]][targetPos[1]];
-            destinationPos = [event.to[0] + 1, event.to[1]];
-            if (gameBoard[destinationPos[0]][destinationPos[1]] == null) {
-                carryMoveEvent = evU.newMove(targetPiece, null, targetPos, destinationPos, false);
-            }
-        } else {
-            targetPos = [event.from[0] - 1, event.from[1]];
-            targetPiece = gameBoard[targetPos[0]][targetPos[1]];
-            destinationPos = [event.to[0] - 1, event.to[1]];
-            if (gameBoard[destinationPos[0]][destinationPos[1]] == null) {
-                carryMoveEvent = evU.newMove(targetPiece, null, targetPos, destinationPos, false);
-            }
-        }
-
-        if (carryMoveEvent != null) {
-            bU.doEvent(board, carryMoveEvent);
-        }
-    }`,
-    `(_, __) => {}`);
 
 export const SPAWN_SPECIFIC = (piece) => newEnchanment("Spawn from " + piece.name, TRIGGERS.ON_CAPTURE,
         `(event, board) => {

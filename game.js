@@ -34,6 +34,23 @@ export class Game {
 
         bU.initialise(this, pearlPlayer, onyxPlayer);
 
+        
+        // START OF GAME PLAYER DEVIATIONS
+        pearlPlayer.effects.forEach(effectName => {
+            let deviation = dU[effectName];
+            if (deviation.activation === dU.ACTIVATION.START_GAME) {
+                eval(deviation.effect)(game, 0);
+            }
+        });
+
+        onyxPlayer.effects.forEach(effectName => {
+            let deviation = dU[effectName];
+            if (deviation.activation === dU.ACTIVATION.START_GAME) {
+                eval(deviation.effect)(game, 1);
+            }
+        });
+
+
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
     }
 
