@@ -132,7 +132,10 @@ export class Game {
             // Call this funciton again to handle a new game event
             // and feed in the evaluator's chosen move
             // but set it to be a machine move and not a human move
-            this.handleGameEvent(evaluator.chooseMove(3)[1], false);
+            // also by using setTimeout it avoids some glitchy screen tearing
+            setTimeout((moveEvent, game) => {
+                game.handleGameEvent(moveEvent, false);
+            }, 400, evaluator.chooseMove(3)[1], this);
         }
     }
 
