@@ -21,7 +21,7 @@ export class Game {
 
         // Get the readout object
         let readout = document.getElementById("readout");
-        
+
         // Clear the readout when a new game is made
         while (readout.firstChild) {
             readout.removeChild(readout.firstChild);
@@ -134,18 +134,8 @@ export class Game {
 
                         }
                     });
-                    
-                    if (event.captured !== null) {
-                        this.tiles.forEach(tile => {
-                            if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
-                                for (let t = 0; t < 100; t++) {
-                                    setTimeout(rs.setImageAlpha, offset + (t * 3), tile.img, (100 - t + 1)/100);
-                                }
-                            }
-                        });
-                    }
-        
 
+                    // MOVE READOUT STUFF
                     // Grab document readout element
                     let readout = document.getElementById("readout");
                     // Create a new p element
@@ -163,9 +153,29 @@ export class Game {
                         playerName = this.pearlPlayer.firstName + " " + this.pearlPlayer.lastName;
                     }
 
-                    // Construct the sentence saying what the move was
-                    moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
+                    
+                    if (event.captured !== null) {
+                        this.tiles.forEach(tile => {
+                            if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
+                                for (let t = 0; t < 100; t++) {
+                                    setTimeout(rs.setImageAlpha, offset + (t * 3), tile.img, (100 - t + 1)/100);
+                                }
+                            }
+                        });
+
+                        // Construct the sentence saying what the move was
+                        moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
+                            " to " + files[event.to[0]] + [event.to[1] + 1] + " and took " + event.captured.name;
+                    } else {
+                        // Construct the sentence saying what the move was
+                        moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
                         " to " + files[event.to[0]] + [event.to[1] + 1];
+                    }
+        
+
+
+
+
 
                     // Add the sentence to the readout
                     readout.appendChild(moveReadout);
