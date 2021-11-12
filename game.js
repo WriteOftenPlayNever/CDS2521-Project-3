@@ -40,7 +40,7 @@ export class Game {
         let evaluator = new Evaluator(this.board, pearlPlayer, null);
         
         // Handle the game event for the move chosen by the evaluator
-        this.handleGameEvent(evaluator.chooseMove(3)[1], false);
+        bU.doEvent(this.board, evaluator.chooseMove(3)[1]);
 
         // Show the tiles to the player
         this.tiles = bU.toCanvasTiles(this.board, boardCorner, tileSize);
