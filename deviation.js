@@ -150,8 +150,7 @@ export const INSCRUTABLE_ORB = newDeviation("Inscrutable Orb", "There is an orb 
     }
     let theOrb = affiliation === 0 ? rs.objCopy(pU.ONYX_INSCRUTABLE_ORB) : rs.objCopy(pU.PEARL_INSCRUTABLE_ORB);
     let target = rs.randSelect(locations);
-    let captured = gameBoard[target[0]][target[1]];
-    bU.doEvent(board, evU.newCreation(theOrb, captured, target, false));
+    gameBoard[target[0]][target[1]] = theOrb;
 }`)
 
 export const MISSILE_DEFENSE = newDeviation("Missile Defense", "Two of the pawns have been replaced with missiles.", ACTIVATION.START_GAME, 
@@ -174,10 +173,8 @@ export const MISSILE_DEFENSE = newDeviation("Missile Defense", "Two of the pawns
     let secondMissile = affiliation === 0 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
     let firstTarget = rs.randSelect(locations);
     let secondTarget = rs.randSelect(locations);
-    let firstCaptured = gameBoard[firstTarget[0]][firstTarget[1]];
-    let secondCaptured = gameBoard[secondTarget[0]][secondTarget[1]];
-    bU.doEvent(board, evU.newCreation(firstMissile, firstCaptured, firstTarget, false));
-    bU.doEvent(board, evU.newCreation(secondMissile, secondCaptured, secondTarget, false));
+    gameBoard[firstTarget[0]][firstTarget[1]] = firstMissile;
+    gameBoard[secondTarget[0]][secondTarget[1]] = secondMissile;
 }`)
 
 export const SCRAMBLED = newDeviation("Scrambled", "The back row has been scrambled.", ACTIVATION.START_GAME,

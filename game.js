@@ -21,17 +21,39 @@ export class Game {
 
 
         // START OF GAME PLAYER DEVIATIONS
+        let readout = document.getElementById("readout");
+
+        // For each of the pearl player's deviations
         pearlPlayer.effects.forEach(effectName => {
+            // Grab the deviaiton from the file using the name
             let deviation = dU[effectName];
             if (deviation.activation === dU.ACTIVATION.START_GAME) {
+                // Activate the deviation effect
                 eval(deviation.effect)(this, 0);
+
+                // Create a new <p> tag to contain the readout data for the deviation
+                let deviationReadoutTag = document.createElement("p");
+                // Set the text tot he name and description of the deviation
+                deviationReadoutTag.textContent = deviation.name + ": " + deviation.description;
+                // Add it to the DOM
+                readout.appendChild(deviationReadoutTag);
             }
         });
 
+        // For each of the onyx player's deviations
         onyxPlayer.effects.forEach(effectName => {
+            // Grab the deviaiton from the file using the name
             let deviation = dU[effectName];
             if (deviation.activation === dU.ACTIVATION.START_GAME) {
+                // Activate the deviation effect
                 eval(deviation.effect)(this, 1);
+
+                // Create a new <p> tag to contain the readout data for the deviation
+                let deviationReadoutTag = document.createElement("p");
+                // Set the text tot he name and description of the deviation
+                deviationReadoutTag.textContent = deviation.name + ": " + deviation.description;
+                // Add it to the DOM
+                readout.appendChild(deviationReadoutTag);
             }
         });
 
@@ -103,11 +125,9 @@ export class Game {
                                 }, offset + 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
                             }
 
-
                         }
                     });
                     
-
                     if (event.captured !== null) {
                         this.tiles.forEach(tile => {
                             if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
@@ -118,6 +138,9 @@ export class Game {
                         });
                     }
         
+
+                    let 
+
                     break;
                 default:
                     break;
