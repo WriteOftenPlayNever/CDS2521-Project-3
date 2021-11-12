@@ -1,11 +1,12 @@
 
+// Event type enum
 export const EVENT_TYPES = {
     CREATE: 0,
     MOVE: 1,
     COMMENTARY: 3
 }
 
-
+// Creation event builder
 export function newCreation(piece, captured, to, isRest) {
     return {
         type: EVENT_TYPES.CREATE,
@@ -17,6 +18,7 @@ export function newCreation(piece, captured, to, isRest) {
     }
 }
 
+// move event builder
 export function newMove(piece, captured, from, to, isRest) {
     return {
         type: EVENT_TYPES.MOVE,
@@ -29,6 +31,7 @@ export function newMove(piece, captured, from, to, isRest) {
     }
 }
 
+// commentary event builder
 export function newCommentary(description, isRest) {
     return {
         type: EVENT_TYPES.COMMENTARY,
@@ -41,6 +44,7 @@ export function newCommentary(description, isRest) {
     }
 }
 
+// generalised event builder
 export function newEvent(type, isRest, description, piece, captured, from, to) {
     return {
         type: type,

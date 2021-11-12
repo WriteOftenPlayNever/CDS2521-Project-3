@@ -1,3 +1,5 @@
+// Big player JSON storage area
+
 export const players = {
 	"Suspenders Heathcliff": {
 		"firstName": "Suspenders",

@@ -3,15 +3,16 @@ import * as bU from "./board.js";
 import * as evU from "./event.js";
 import * as pU from "./piece.js";
 
-
-// piece effect function template (event, board) => {}
-
+// piece enchanment activation enum
 export const TRIGGERS = {
     ON_MOVE: 0,
     ON_CAPTURE: 1,
     ON_DEATH: 2
 }
 
+//
+// PIECE ENCHANTMENT DATA
+//
 export const DOUBLE_MOVE = newEnchanment("Double First Move", TRIGGERS.ON_MOVE, 
     "(event, _) => { if (event.piece.moveCount === 1) { event.piece.movePattern.range = 1 } }", 
     "(event, _) => { if (event.piece.moveCount === 1) { event.piece.movePattern.range = 2 } }");
@@ -81,6 +82,7 @@ export const SPAWN_SPECIFIC = (piece) => newEnchanment("Spawn from " + piece.nam
 
 
 
+// Enchantment JSON builder
 export function newEnchanment(name, trigger, effect, undo) {
     return {
         name: name,

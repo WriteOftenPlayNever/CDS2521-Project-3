@@ -4,13 +4,17 @@ import * as bU from "./board.js";
 import * as evU from "./event.js";
 import * as enU from "./enchantment.js";
 
+// Deviation activation enum
 export const ACTIVATION = {
     START_GAME: 0,
     END_TURN: 1,
     END_GAME: 2
 }
 
-// devation effect function template game => ()
+//
+// PLAYER DEVIATION DATA
+//
+
 export const HACKING = newDeviation("Hacking", "At the start of the game, an enemy non-pawn is turned into a pawn.", ACTIVATION.START_GAME, 
 `(game, affiliation) => { 
     let board = game.board, 

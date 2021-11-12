@@ -1,6 +1,11 @@
 import * as rs from "./resources.js";
 import * as enU from "./enchantment.js";
 
+
+//
+// PIECE DATA
+//
+
 // PEARL PIECES
 export const PEARL_PAWN = newPiece("P", "a pawn", "./img/pearl/pawn.png", 0, "pawn", buildMP(2, [0, 1]), buildMP(1, [1, 1], [-1, 1]), 
     [rs.objCopy(enU.DOUBLE_MOVE)], [], ["military", "proletariat"]);
@@ -22,7 +27,7 @@ export const PEARL_ELEPHANT = newPiece("E", "an elephant", "./img/pearl/elephant
         [], [], ["military", "animal"]);
 export const PEARL_VALKYRIE = newPiece("V", "a valkyrie", "./img/pearl/valkyrie.png", 0, "valkyrie", buildMP(3, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]), null,
         [], [], ["military", "armoured", "flying", "magic"]);
-export const PEARL_MISSILE = newPiece("M", "A Missile", "./img/pearl/missile.png", 0, "missile", buildMP(3, [0, 1]), null, 
+export const PEARL_MISSILE = newPiece("M", "A Missile", "./img/pearl/missile.png", 0, "missile", buildMP(3, [0, 1]), buildMP(3, [0, 1]), 
         [], [], ["military"]);
     
 // ONYX PIECES
@@ -46,7 +51,7 @@ export const ONYX_ELEPHANT = newPiece("e", "an elephant", "./img/onyx/elephant.p
         [], [], ["military", "animal"]);
 export const ONYX_VALKYRIE = newPiece("v", "a valkyrie", "./img/onyx/valkyrie.png", 1, "valkyrie", buildMP(3, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]), null,
         [], [], ["military", "armoured", "flying", "magic"]);
-export const ONYX_MISSILE = newPiece("M", "a Missile", "./img/onyx/missile.png", 0, "missile", buildMP(3, [0, -1]), null, 
+export const ONYX_MISSILE = newPiece("M", "a Missile", "./img/onyx/missile.png", 0, "missile", buildMP(3, [0, -1]), buildMP(3, [0, -1]), 
         [], [], ["military"]);
 
 // NEUTRAL PIECES
@@ -54,6 +59,7 @@ export const ARTIFACT = newPiece("A", "An Artifact", "./img/misc/artifact.png", 
 export const LAKE = newPiece("L", "A Lake", "./img/misc/lake.png", 3, "lake", buildMP(0, [0, 0]), null, [], [], ["structure", "natural", "elemental"]);
 
 
+// Piece JSON builder
 export function newPiece(char, name, imageDir, affiliation, type, movePattern, attackPattern, enchantments, hats, tags) {
     return {
         char: char,
@@ -70,7 +76,7 @@ export function newPiece(char, name, imageDir, affiliation, type, movePattern, a
     }
 }
 
-
+// Piece movepattern builder
 export function buildMP(range, ...moves) {
     return {
         range: range,

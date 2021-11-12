@@ -7,27 +7,32 @@ import * as evU from "./event.js";
 import * as enU from "./enchantment.js";
 
 
-
+// do event onto the board
 export function doEvent(board, event) {
+    // Set up variables
     let from = event.from;
     let to = event.to;
 
     board.eventList.push(event);
 
+    // switch on event type
     switch (event.type) {
         case evU.EVENT_TYPES.CREATE:
 
+            // If it's a creation, just put it in place
             board.gameBoard[to[0]][to[1]] = event.piece;
             
             break;
         case evU.EVENT_TYPES.MOVE:
 
-            // update board
+            // update board move count if it's a "rest" move
             if (event.rest) {
                 board.plies++;
             }
+            // Update board values
             board.gameBoard[from[0]][from[1]] = null;
             board.gameBoard[to[0]][to[1]] = event.piece;
+            // 
             if (event.captured !== null) {
                 if (event.captured.type === "king") {
                     board.complete = true;
@@ -39,13 +44,15 @@ export function doEvent(board, event) {
 
             // do move enchantments
             event.piece.enchantments.forEach(enchant => {
+                // If the enchantment goes of on move
                 if (enchant.trigger === enU.TRIGGERS.ON_MOVE) {
+                    // activate enchantment
                     eval(enchant.effect)(event, board);
                 } 
+                // If the enchantment goes of on capture
                 if (enchant.trigger === enU.TRIGGERS.ON_CAPTURE && event.captured !== null) {
+                    // activate enchantment
                     let enchantFunction = eval(enchant.effect);
-                    console.log(event);
-                    console.log(enchantFunction);
                     enchantFunction(event, board);
                 }
             })
@@ -53,7 +60,9 @@ export function doEvent(board, event) {
             // do capture enchantments
             if (event.captured !== null) {
                 event.captured.enchantments.forEach(enchant => {
+                    // If the enchantment goes of on death
                     if (enchant.trigger === enU.TRIGGERS.ON_DEATH) {
+                        // activate enchantment
                         eval(enchant.effect)(event, board);
                     } 
                 })
@@ -65,6 +74,10 @@ export function doEvent(board, event) {
     }
 }
 
+//
+// SAME AS DO EVENT BUT WITH REVERSED LOCATIONS
+// AND IN REVERSE ORDER
+//
 export function undoLastEvent(board) {
     let event = board.eventList.pop();
 
@@ -125,10 +138,10 @@ export function undoLastEvent(board) {
     return event;
 }
 
+// Iterate backwards through events undoing them
 export function undoLastMove(board) {
     while (undoLastEvent(board).rest === false);
 }
-
 
 export function getMoves(board, affiliation) {
     let moves = [];

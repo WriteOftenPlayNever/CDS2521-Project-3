@@ -1,0 +1,10 @@
+***THE CODE WILL NOT RUN LOCALLY***
+
+The images for the pieces are files that have to be loaded by p5js
+and most browsers do not allow local html files to access the file system
+because it's a security flaw
+
+I have hosted the website on github pages and you can see it here:
+https://writeoftenplaynever.github.io/CDS2521-Project-3/
+
+That is the front end of a public github repository that you can check is identical to the files enclosed here, the code really does run just ONLY on a local server or a hosted server
