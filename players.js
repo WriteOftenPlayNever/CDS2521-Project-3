@@ -2120,7 +2120,7 @@ export const players = {
 			"forgetfulness": 25,
 			"impulsivity": 57
 		},
-		"effects": ["ANNIHILATION"],
+		"effects": ["HEAD_START"],
 		"openings": {}
 	},
 	"Yaboi Gherkin": {

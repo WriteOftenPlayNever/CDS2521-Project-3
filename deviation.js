@@ -211,23 +211,15 @@ export const TROJAN_HORSE = newDeviation("Trojan Horse", "There are secret troop
     }
 }`);
 
-export const ANNIHILATION = newDeviation("Annihilation", "If a non-pawn captures an enemy piece of the same type, it Hadronises.", ACTIVATION.START_GAME,
-    `(game, affiliation) => {
-        let board = game.board, 
-        gameBoard = game.board.gameBoard, 
-        player = affiliation === 0 ? game.pearlPlayer : game.onyxPlayer;
+export const HEAD_START = newDeviation("Head Start", "Start the game with three random moves played", ACTIVATION.START_GAME,
+`(game, affiliation) => {
+    let board = game.board;
+    let moves = bU.getMoves(board, affiliation);
 
-        for (let x = 0; x < gameBoard.length; x++) {
-            for (let y = 0; y < gameBoard.length; y++) {
-                let piece = gameBoard[x][y];
-                if (piece != null) {
-                    if (piece.affiliation == affiliation && piece.type != "king" && piece.type != "pawn") {
-                        piece.enchantments.push(enU.SPAWN_SPECIFIC(piece));
-                    }
-                }
-            }
-        }
-    }`);
+    for (let i = 0; i < (2 + affiliation); i++) {
+        bU.doEvent(board, rs.randSelect(moves));
+    }
+}`)
 
 export const GOD_KING = newDeviation("God King.", "The king moves like a bishop for its first move.", ACTIVATION.START_GAME, 
 `(game, affiliation) => {
