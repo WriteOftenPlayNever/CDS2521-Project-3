@@ -35,7 +35,7 @@ export class Game {
 
         // For each of the pearl player's deviations
         pearlPlayer.effects.forEach(effectName => {
-            // Grab the deviaiton from the file using the name
+            // Grab the deviation from the file using the name
             let deviation = dU[effectName];
             if (deviation.activation === dU.ACTIVATION.START_GAME) {
                 // Activate the deviation effect
@@ -79,113 +79,129 @@ export class Game {
     }
 
     handleGameEvent(chosenEvent, isHumanMove) {
+        // Get the current event count
         let eventCount = this.board.eventList.length;
 
+        // Do the given event onto the board
         bU.doEvent(this.board, chosenEvent);
 
+        // If it caused multiple events to exist, iterate over those using eventCount
         for(let i = eventCount; i < this.board.eventList.length; i++) {
+            // Current event
             let event = this.board.eventList[i];
-            let offset = (i - eventCount) * 100;
-            switch (event.type) {
-                case evU.EVENT_TYPES.MOVE:
-                    this.tiles.forEach(tile => {
-                        if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
-                            let beginning = {
-                                x: tile.x,
-                                y: tile.y
-                            }
-                            let destination = {
-                                x: this.boardCorner.x + event.to[0] * this.tileSize,
-                                y: this.boardCorner.y + event.to[1] * this.tileSize
-                            }
-                            let movement = {
-                                x: destination.x - beginning.x,
-                                y: destination.y - beginning.y
+            // Millisecond offset to be nice to the canvas
+            let offset = (i - eventCount) * 200;
+
+            // Most of the display logic happens to moves
+            if (event.type === evU.EVENT_TYPES.MOVE) {
+                // iterate over tiles to find the right one
+                this.tiles.forEach(tile => {
+                    // Found the right one
+                    if (tile.xIndex === event.from[0] && tile.yIndex === event.from[1]) {
+                        // Create a container for the start location
+                        let beginning = {
+                            x: tile.x,
+                            y: tile.y
+                        }
+
+                        // calculate the destination tile
+                        let destination = {
+                            x: this.boardCorner.x + event.to[0] * this.tileSize,
+                            y: this.boardCorner.y + event.to[1] * this.tileSize
+                        }
+
+                        // create a makeshift movement vector
+                        let movement = {
+                            x: destination.x - beginning.x,
+                            y: destination.y - beginning.y
+                        }
+
+                        // If it's a human move we don't need to show the move in progress, simplifies things
+                        if (isHumanMove) {
+                            // Set the tile to the destination location
+                            tile.x = destination.x;
+                            tile.y = destination.y;
+
+                            // in 100 milliseconds, update the canvas
+                            setTimeout((game, tiles) => { game.tiles = tiles; }, offset + 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
+                        } else {
+                            // Iterate 100 times to create a smooth gradient
+                            for (let t = 0; t < 100; t++) {
+                                // At 100 intervals, set the location of the tile to t% through the movement
+                                setTimeout((tile, beginning, movement) => {
+                                    // Use iterator to find the percentage travelled
+                                    let travelled = {
+                                        x: movement.x * (t + 1)/100,
+                                        y: movement.y * (t + 1)/100
+                                    }
+                                    // calculate the current position vector
+                                    let currentLocation = {
+                                        x: beginning.x + travelled.x,
+                                        y: beginning.y + travelled.y
+                                    }
+                                    // Move the tile to the correct place
+                                    tile.x = currentLocation.x;
+                                    tile.y = currentLocation.y;
+                                }, offset + (t * 3), tile, rs.objCopy(beginning), rs.objCopy(movement));
                             }
 
-                            if (isHumanMove) {
+                            // A while later, reset the game tiles
+                            setTimeout((tile, game, tiles) => {
+                                // Finalise the position of the tile
                                 tile.x = destination.x;
                                 tile.y = destination.y;
 
-                                setTimeout((game, tiles) => { game.tiles = tiles; }, offset + 100, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
-                            } else {
-                                for (let t = 0; t < 100; t++) {
-                                    // console.log("time test");
-                                    setTimeout((tile, beginning, movement) => {
-                                        let travelled = {
-                                            x: movement.x * (t + 1)/100,
-                                            y: movement.y * (t + 1)/100
-                                        }
-                                        let currentLocation = {
-                                            x: beginning.x + travelled.x,
-                                            y: beginning.y + travelled.y
-                                        }
-                                        tile.x = currentLocation.x;
-                                        tile.y = currentLocation.y;
-                                    }, offset + (t * 3), tile, rs.objCopy(beginning), rs.objCopy(movement));
-                                }
+                                // Reset game tiles
+                                game.tiles = tiles;
+                            }, offset + 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
+                        }
 
-                                setTimeout((tile, game, tiles) => {
-                                    tile.x = destination.x;
-                                    tile.y = destination.y;
-    
-                                    console.log(tile.x + " " + tile.y);
-    
-                                    game.tiles = tiles;
-                                }, offset + 350, tile, this, bU.toCanvasTiles(this.board, this.boardCorner, this.tileSize));
+                    }
+                });
+
+                // MOVE READOUT STUFF
+                // Grab document readout element
+                let readout = document.getElementById("readout");
+                // Create a new p element
+                let moveReadout = document.createElement("p");
+                // The file to letter conversion array
+                let files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+                // player name holder to be set later
+                let playerName;
+
+                // The human player is always playing as onyx, so we can use that to determine which name to use
+                // and construct the full name
+                if (isHumanMove) {
+                    playerName = this.onyxPlayer.firstName + " " + this.onyxPlayer.lastName;
+                } else {
+                    playerName = this.pearlPlayer.firstName + " " + this.pearlPlayer.lastName;
+                }
+
+                // If a piece was captured, it needs to fade out of existence
+                if (event.captured !== null) {
+                    this.tiles.forEach(tile => {
+                        // Iterate over tiles until the right one is found
+                        if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
+                            // Iterate 100 times to create  asmooth gradiient
+                            for (let t = 0; t < 100; t++) {
+                                // Set the transparency of the image to (100 - t)%
+                                setTimeout(rs.setImageAlpha, offset + (t * 3), tile.img, (100 - t + 1)/100);
                             }
-
                         }
                     });
 
-                    // MOVE READOUT STUFF
-                    // Grab document readout element
-                    let readout = document.getElementById("readout");
-                    // Create a new p element
-                    let moveReadout = document.createElement("p");
-                    // The file to letter conversion array
-                    let files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-                    // player name holder to be set later
-                    let playerName;
+                    // Construct the sentence saying what the move was and what was captured
+                    moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
+                        " to " + files[event.to[0]] + [event.to[1] + 1] + " and took " + event.captured.name;
+                } else {
+                    // Construct the sentence saying what the move was
+                    moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
+                    " to " + files[event.to[0]] + [event.to[1] + 1];
+                }
+    
 
-                    // The human player is always playing as onyx, so we can use that to determine which name to use
-                    // and construct the full name
-                    if (isHumanMove) {
-                        playerName = this.onyxPlayer.firstName + " " + this.onyxPlayer.lastName;
-                    } else {
-                        playerName = this.pearlPlayer.firstName + " " + this.pearlPlayer.lastName;
-                    }
-
-                    
-                    if (event.captured !== null) {
-                        this.tiles.forEach(tile => {
-                            if (tile.xIndex === event.to[0] && tile.yIndex === event.to[1]) {
-                                for (let t = 0; t < 100; t++) {
-                                    setTimeout(rs.setImageAlpha, offset + (t * 3), tile.img, (100 - t + 1)/100);
-                                }
-                            }
-                        });
-
-                        // Construct the sentence saying what the move was and what was captured
-                        moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
-                            " to " + files[event.to[0]] + [event.to[1] + 1] + " and took " + event.captured.name;
-                    } else {
-                        // Construct the sentence saying what the move was
-                        moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
-                        " to " + files[event.to[0]] + [event.to[1] + 1];
-                    }
-        
-
-
-
-
-
-                    // Add the sentence to the readout
-                    readout.appendChild(moveReadout);
-
-                    break;
-                default:
-                    break;
+                // Add the sentence to the readout
+                readout.appendChild(moveReadout);
             }
         }
 
@@ -205,26 +221,40 @@ export class Game {
     }
 
     drawToCanvas() {
+        // Set to noStroke()
         noStroke();
         let gameBoard = this.board.gameBoard;
+        // Iterate over board in a strange direction to create the correct orientation
+        // This iteration creates the background tiles
         for (let x = gameBoard.length - 1; x > -1; x--) {
             for (let y = 0; y < gameBoard.length; y++) {
+                // even squares have colour, odd ones are white
                 if ((x + y) % 2 === 0) {
+                    // set fill ot purple
                     fill(255, 218, 179);
+                    // create square
                     square(this.boardCorner.x + (x * this.tileSize), this.boardCorner.y + (y * this.tileSize), this.tileSize);
                 } else {
+                    // set fill to white
                     fill(255);
+                    // create the square
                     square(this.boardCorner.x + (x * this.tileSize), this.boardCorner.y + (y * this.tileSize), this.tileSize);
                 }
             }
         }
 
+        // Iterate over the game tiles
         this.tiles.forEach(tile => {
+            // Create the tile image
             let tImg = tile.img;
+            // If it exists...
             if (tImg) {
+                // If the tile is grabbed, always set it to the mouse location
                 if (tile.grabbed) {
                     image(tImg, mouseX - (tImg.width / 2), mouseY - (tImg.height / 2));
                 } else {
+                    // Otherwise put it in the correct square
+                    // Calculate offsets
                     let xOffset = (this.tileSize - tImg.width)/2;
                     let yOffset = (this.tileSize - tImg.height)/2;
                     image(tImg, tile.x + xOffset, tile.y + yOffset);
@@ -233,22 +263,29 @@ export class Game {
         });
     }
 
+    // Mouse pressed handler
     mousePressed() {
+        // Get the board position, rank and file, of the mouse
         let boardPosition = this.positionToIndex(mouseX, mouseY);
 
-
+        // Iterate over the tiles until you find the corerct one
         this.tiles.forEach(tile => {
             if (tile.xIndex === boardPosition.x && tile.yIndex === boardPosition.y) {
+                // Set the relevant tile to true
                 tile.grabbed = true;
             }
         });
     }
 
+    // Mouse released handler
     mouseReleased() {
+        // Get the board position, rank and file, of the mouse
         let boardPosition = this.positionToIndex(mouseX, mouseY);
-
+        
+        // Iterate over tiles to see if any are grabbed
         this.tiles.forEach(tile => {
             if (tile.grabbed) {
+                // Ungrab the tile
                 tile.grabbed = false;
 
                 // Get the piece from the tile you were grabbing
@@ -283,11 +320,14 @@ export class Game {
     }
 
     positionToIndex(x, y) {
+        // Create location vector
         let posVector = p5.Vector.sub(createVector(x, y), this.boardCorner);
         
+        // Use tilesize to figure out board position vector
         let xIndex = Math.floor(posVector.x / this.tileSize);
         let yIndex = Math.floor(posVector.y / this.tileSize);
 
+        // Return board position
         return {
             x: xIndex,
             y: yIndex
