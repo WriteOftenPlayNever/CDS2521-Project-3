@@ -139,7 +139,28 @@ export class Game {
                     }
         
 
-                    let 
+                    // Grab document readout element
+                    let readout = document.getElementById("readout");
+                    // Create a new p element
+                    let moveReadout = document.createElement("p");
+                    // The file to letter conversion array
+                    let files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+                    // player name holder to be set later
+                    let playerName;
+
+                    // The human player is always playing as onyx, so we can use that to determine which name to use
+                    // and construct the full name
+                    if (isHumanMove) {
+                        playerName = this.onyxPlayer.firstName + " " + this.onyxPlayer.lastName;
+                    } else {
+                        playerName = this.pearlPlayer.firstName + " " + this.pearlPlayer.lastName;
+                    }
+
+                    // Construct the sentence saying what the move was
+                    moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
+                        " to " + files[event.to[0]] + [event.to[1] + 1];
+
+                    readout.appendChild(moveReadout);
 
                     break;
                 default:
