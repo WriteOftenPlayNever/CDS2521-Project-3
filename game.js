@@ -163,7 +163,7 @@ export class Game {
                             }
                         });
 
-                        // Construct the sentence saying what the move was
+                        // Construct the sentence saying what the move was and what was captured
                         moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
                             " to " + files[event.to[0]] + [event.to[1] + 1] + " and took " + event.captured.name;
                     } else {
