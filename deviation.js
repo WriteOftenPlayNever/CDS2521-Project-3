@@ -238,7 +238,7 @@ export const GOD_KING = newDeviation("God King.", "The king moves like a bishop 
             let piece = gameBoard[x][y];
             if (piece != null) {
                 if (piece.affiliation == affiliation && (piece.type == "king")) {
-                    piece.movePattern = pU.buildMP(1, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]);
+                    piece.movePattern = pU.buildMP(8, [1, 1], [-1, 1], [1, -1], [-1, -1]);
                     piece.enchantments.push(rs.objCopy(enU.HIEROPHANT));
                 }
             }
