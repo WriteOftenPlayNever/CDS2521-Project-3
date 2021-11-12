@@ -169,8 +169,8 @@ export const MISSILE_DEFENSE = newDeviation("Missile Defense", "Two of the pawns
             }
         }
     }
-    let firstMissile = affiliation === 0 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
-    let secondMissile = affiliation === 0 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
+    let firstMissile = affiliation === 1 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
+    let secondMissile = affiliation === 1 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
     let firstTarget = rs.randSelect(locations);
     let secondTarget = rs.randSelect(locations);
     gameBoard[firstTarget[0]][firstTarget[1]] = firstMissile;
