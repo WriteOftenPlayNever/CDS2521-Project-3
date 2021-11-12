@@ -157,30 +157,6 @@ export const INSCRUTABLE_ORB = newDeviation("Inscrutable Orb", "There is an orb 
     gameBoard[target[0]][target[1]] = theOrb;
 }`)
 
-export const MISSILE_DEFENSE = newDeviation("Missile Defense", "Two of the pawns have been replaced with missiles.", ACTIVATION.START_GAME, 
-`(game, affiliation) => { 
-    let board = game.board, 
-        gameBoard = game.board.gameBoard, 
-        locations = [];
-
-    for (let x = 0; x < gameBoard.length; x++) {
-        for (let y = 0; y < gameBoard.length; y++) {
-            let piece = gameBoard[x][y];
-            if (piece != null) {
-                if (piece.affiliation == affiliation && piece.type == "pawn") {
-                    locations.push([x, y]);
-                }
-            }
-        }
-    }
-    let firstMissile = affiliation === 1 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
-    let secondMissile = affiliation === 1 ? rs.objCopy(pU.ONYX_MISSILE) : rs.objCopy(pU.PEARL_MISSILE);
-    let firstTarget = rs.randSelect(locations);
-    let secondTarget = rs.randSelect(locations);
-    gameBoard[firstTarget[0]][firstTarget[1]] = firstMissile;
-    gameBoard[secondTarget[0]][secondTarget[1]] = secondMissile;
-}`)
-
 export const SCRAMBLED = newDeviation("Scrambled", "The back row has been scrambled.", ACTIVATION.START_GAME,
 `(game, affiliation) => {
     let gameBoard = game.board.gameBoard,
