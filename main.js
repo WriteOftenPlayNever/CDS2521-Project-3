@@ -74,6 +74,11 @@ window.mouseReleased = function(mouseEvent) {
 }
 
 function newGame() {
+    // The size of a tile of the board is 1/8th of 95% of the height of the screen
+    let tileSize = (windowHeight * 0.95)/8;
+    // The location of the corner of the board can then be found by this equation
+    let corner = createVector((windowWidth - (tileSize * 8))/2, windowHeight * 0.025);
+
     // Grab the DOM elements for the dropdown boxes
     const playerSelector = document.getElementById("playerSelector");
     const enemySelector = document.getElementById("enemySelector");
