@@ -24,14 +24,14 @@ export class Game {
         pearlPlayer.effects.forEach(effectName => {
             let deviation = dU[effectName];
             if (deviation.activation === dU.ACTIVATION.START_GAME) {
-                eval(deviation.effect)(game, 0);
+                eval(deviation.effect)(this, 0);
             }
         });
 
         onyxPlayer.effects.forEach(effectName => {
             let deviation = dU[effectName];
             if (deviation.activation === dU.ACTIVATION.START_GAME) {
-                eval(deviation.effect)(game, 1);
+                eval(deviation.effect)(this, 1);
             }
         });
 
