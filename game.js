@@ -19,9 +19,16 @@ export class Game {
 
         bU.initialise(this, pearlPlayer, onyxPlayer);
 
+        // Get the readout object
+        let readout = document.getElementById("readout");
+        
+        // Clear the readout when a new game is made
+        while (readout.firstChild) {
+            readout.removeChild(readout.firstChild);
+        }
+
 
         // START OF GAME PLAYER DEVIATIONS
-        let readout = document.getElementById("readout");
 
         // For each of the pearl player's deviations
         pearlPlayer.effects.forEach(effectName => {
