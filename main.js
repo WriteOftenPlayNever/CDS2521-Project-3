@@ -25,6 +25,9 @@ window.preload = function() {
         enemySelector.appendChild(enemyOptionTag);
     }
 
+    playerSelector.addEventListener("change", newGame);
+    enemySelector.addEventListener("change", newGame);
+
     GAME_INSTANCE = new game.Game(players["Suspenders Heathcliff"], players["Jellybean Zugzwang"], corner, tileSize);
 }
 
