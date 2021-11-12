@@ -160,6 +160,7 @@ export class Game {
                     moveReadout.textContent = playerName + " moved " + event.piece.name + " from " + files[event.from[0]] + [event.from[1] + 1] + 
                         " to " + files[event.to[0]] + [event.to[1] + 1];
 
+                    // Add the sentence to the readout
                     readout.appendChild(moveReadout);
 
                     break;

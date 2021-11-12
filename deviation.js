@@ -272,31 +272,6 @@ export const MILITOCRACY = newDeviation("Militocracy", "No bishops, no rooks, on
     }
 }`);
 
-export const DISLOCATIVE = newDeviation("Dislocative", "At the end of each turn, two of the pieces are swapped.", ACTIVATION.END_TURN,
-`(game, affiliation) => {
-    let gameBoard = game.board.gameBoard, 
-    locations = [];
-
-    for (let x = 0; x < gameBoard.length; x++) {
-        for (let y = 0; y < gameBoard.length; y++) {
-            let piece = gameBoard[x][y];
-            if (piece != null) {
-                if (piece.affiliation == affiliation) {
-                    locations.push([x, y]);
-                }
-            }
-        }
-    }
-
-    first = rs.randSelect(locations);
-    second = rs.randSelect(locations);
-    let swapHolder = gameBoard[first[0]][first[0]];
-    gameBoard[first[0]][first[0]] = gameBoard[second[0]][second[0]];
-    gameBoard[second[0]][second[0]] = swapHolder;
-
-    bU.doEvent(game.board, evU.newCommentary("Two pieces were swapped!", false));
-}`);
-
 export const REVOLUTIONARIES = newDeviation("Revolutionaries", "The queen is dead, and the population is roused to action.", ACTIVATION.START_GAME,
 `(game, affiliation) => {
     let gameBoard = game.board.gameBoard;
