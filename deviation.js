@@ -136,7 +136,7 @@ export const INSCRUTABLE_ORB = newDeviation("Inscrutable Orb", "There is an orb 
 `(game, affiliation) => { 
     let board = game.board, 
         gameBoard = game.board.gameBoard, 
-        locations = [],
+        locations = [];
 
     for (let x = 0; x < gameBoard.length; x++) {
         for (let y = 0; y < gameBoard.length; y++) {
@@ -157,7 +157,7 @@ export const MISSILE_DEFENSE = newDeviation("Missile Defense", "Two of the pawns
 `(game, affiliation) => { 
     let board = game.board, 
         gameBoard = game.board.gameBoard, 
-        locations = [],
+        locations = [];
 
     for (let x = 0; x < gameBoard.length; x++) {
         for (let y = 0; y < gameBoard.length; y++) {
@@ -215,7 +215,7 @@ export const ANNIHILATION = newDeviation("Annihilation", "If a non-pawn captures
     `(game, affiliation) => {
         let board = game.board, 
         gameBoard = game.board.gameBoard, 
-        player = affiliation === 0 ? game.pearl.player : game.onyx.player;
+        player = affiliation === 0 ? game.pearlPlayer : game.onyxPlayer;
 
         for (let x = 0; x < gameBoard.length; x++) {
             for (let y = 0; y < gameBoard.length; y++) {
@@ -238,6 +238,7 @@ export const GOD_KING = newDeviation("God King.", "The king moves like a bishop 
             let piece = gameBoard[x][y];
             if (piece != null) {
                 if (piece.affiliation == affiliation && (piece.type == "king")) {
+                    piece.movePattern = pU.buildMP(1, [1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, 1], [1, -1], [-1, -1]);
                     piece.enchantments.push(rs.objCopy(enU.HIEROPHANT));
                 }
             }

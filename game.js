@@ -11,12 +11,15 @@ import { Evaluator } from "./evaluator.js";
 
 export class Game {
     constructor(pearlPlayer, onyxPlayer, boardCorner, tileSize) {
+        // Set all the class data from the constructor
         this.pearlPlayer = pearlPlayer;
         this.onyxPlayer = onyxPlayer;
         this.boardCorner = boardCorner;
         this.tileSize = tileSize;
+        // Create a new board
         this.board = bU.newBoard(8, pearlPlayer, onyxPlayer);
 
+        // Initialise the board
         bU.initialise(this, pearlPlayer, onyxPlayer);
 
         // Get the readout object
